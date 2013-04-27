@@ -25,6 +25,8 @@ void Input::MouseClick(int button, int state, int x, int y)
 				GraphicObject* go = scene->getCurrentGraphicObject();
 				go->addPoint(x, scene->getFrameHeight() - y - 17);
 				scene->add(go);
+				
+				//glutPostRedisplay();
 			}
 			//glutPostRedisplay();
 			//else if (button == GLUT_RIGHT_BUTTON)
