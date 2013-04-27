@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\Files">
+      <UniqueIdentifier>{4a8bcbd0-7d0c-416f-9378-a54ceafd5d2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Splines">
+      <UniqueIdentifier>{8c304a6e-525c-43b7-b09a-808dd48256cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Primitives2D">
+      <UniqueIdentifier>{6daf4f2e-3461-4571-9c23-bd58bcdb8c82}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scene.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Color.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Files\PPMFile.cpp">
+      <Filter>Quelldateien\Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Splines\Circle.cpp">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Splines\BezierCurve.cpp">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Splines\BSpline.cpp">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GraphicObject.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Primitives2D\Rectangle2D.cpp">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Primitives2D\Triangle2D.cpp">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Primitives2D\Polygon2D.cpp">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Splines\Line.cpp">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Scene.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Color.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Files\PPMFile.h">
+      <Filter>Quelldateien\Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Splines\Circle.h">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Splines\BezierCurve.h">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Splines\BSpline.h">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GraphicObject.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Primitives2D\Primitive2D.h">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Primitives2D\Rectangle2D.h">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Primitives2D\Triangle2D.h">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Primitives2D\Polygon2D.h">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Splines\Line.h">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input.h">
+      <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Splines\Spline.h">
+      <Filter>Quelldateien\Splines</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Computergrafik", "Computergrafik.vcxproj", "{2091C86B-634C-426C-8EFE-8077A7F0162E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{DF6EB0E1-EE95-4B02-A5C8-EC5C7F631CEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2091C86B-634C-426C-8EFE-8077A7F0162E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2091C86B-634C-426C-8EFE-8077A7F0162E}.Debug|Win32.Build.0 = Debug|Win32
+		{2091C86B-634C-426C-8EFE-8077A7F0162E}.Release|Win32.ActiveCfg = Release|Win32
+		{2091C86B-634C-426C-8EFE-8077A7F0162E}.Release|Win32.Build.0 = Release|Win32
+		{DF6EB0E1-EE95-4B02-A5C8-EC5C7F631CEB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF6EB0E1-EE95-4B02-A5C8-EC5C7F631CEB}.Debug|Win32.Build.0 = Debug|Win32
+		{DF6EB0E1-EE95-4B02-A5C8-EC5C7F631CEB}.Release|Win32.ActiveCfg = Release|Win32
+		{DF6EB0E1-EE95-4B02-A5C8-EC5C7F631CEB}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
