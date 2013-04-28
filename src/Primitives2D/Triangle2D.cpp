@@ -49,6 +49,16 @@ void Triangle2D::addPoint(int x, int y){
 	}
 	else if (this->thirdPoint == glm::vec2(-1,-1)){
 		this->thirdPoint = glm::vec2(x, y);
+
+		// testing if triangle is counterclockwise, if not rearrange!
+		int d = firstPoint.x*secondPoint.y + secondPoint.x*thirdPoint.y + thirdPoint.x*firstPoint.y 
+			   - secondPoint.y*thirdPoint.x - thirdPoint.y*firstPoint.x - firstPoint.y*secondPoint.x;
+		if (d < 0){
+			glm::vec2 saveVec = secondPoint;
+			secondPoint = thirdPoint;
+			thirdPoint = saveVec;
+		}
+
 		this->isCompleted = true;
 	}
 }
@@ -64,12 +74,17 @@ bool Triangle2D::operator== (Triangle2D const& t) const {
 
 void Triangle2D::draw(unsigned char* frame)
 {
+	if (!this->isCompleted)
+		return;
+
 	int x0 = static_cast<int>(firstPoint.x);	
 	int y0 = static_cast<int>(firstPoint.y);
 	int x1 = static_cast<int>(secondPoint.x);
 	int y1 = static_cast<int>(secondPoint.y);
 	int x2 = static_cast<int>(thirdPoint.x);
 	int y2 = static_cast<int>(thirdPoint.y);
+
+	
 
 	int xmin = glm::min(x0, glm::min(x1,x2));
 	int ymin = glm::min(y0, glm::min(y1,y2));
@@ -84,10 +99,12 @@ void Triangle2D::draw(unsigned char* frame)
 		for(int x = xmin; x<=xmax; x++) {
 			if(ff0 >= 0 && ff1 >=0 && ff2 >= 0) {
 				int c = ff0 + ff1 + ff2;
-				if (bayrzentricColor)
-					this->setPixel(x, y, Color( static_cast<int>(1/c * ff0 * 255),
-												static_cast<int>(1/c * ff1 * 255), 
-												static_cast<int>(1/c * ff2 * 255)), frame);
+				if (bayrzentricColor){
+					int red = 1.0f/c * ff0 * 255;
+					int green = 1.0f/c * ff1 * 255;
+					int blue = 1.0f/c * ff2 * 255;
+					this->setPixel(x, y, Color( red, green, blue), frame);
+				}
 				else{
 					this->setPixel(x, y, color, frame);
 				}

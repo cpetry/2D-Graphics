@@ -147,6 +147,8 @@ int main(int argc, char* argv[])
  	glutCreateWindow("Computergrafik");
 	glutDisplayFunc(RenderScene);
 	glutMouseFunc(&Input::MouseClick);
+	glutKeyboardFunc(&Input::KeyboardPressed);
+	glutSpecialFunc(&Input::KeyboardSpecialPressed);
 	glutIdleFunc(idle);
 
 	SetupRC();

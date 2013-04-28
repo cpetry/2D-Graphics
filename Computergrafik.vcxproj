@@ -97,6 +97,7 @@
     <ClCompile Include="src\Splines\Circle.cpp" />
     <ClCompile Include="src\Splines\BezierCurve.cpp" />
     <ClCompile Include="src\Splines\Line.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Color.h" />
@@ -113,6 +114,7 @@
     <ClInclude Include="src\Splines\BezierCurve.h" />
     <ClInclude Include="src\Splines\Line.h" />
     <ClInclude Include="src\Splines\Spline.h" />
+    <ClInclude Include="src\Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -36,3 +36,48 @@ void Input::MouseClick(int button, int state, int x, int y)
 		
     }
 }
+
+
+void Input::KeyboardPressed(unsigned char key, int x, int y) {
+	switch(key){
+	case 'l':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::LINE); break;	
+	case 'b':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::BEZIER); break;
+	case 'c':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::CIRCLE); break;
+	case 't':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::TRIANGLE); break;
+	case 'r':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::RECTANGLE); break;
+	case 127: // del/entf
+		scene->clearGraphicObjects(); break;
+	case 27: // ESC
+		exit(1); break;
+
+	//37(left arrow)
+	//38(up arrow)
+	//39(right arrow)
+	//40(down arrow)
+	default:
+		break;
+	}
+}
+
+void Input::KeyboardSpecialPressed(int key, int x, int y) {
+	switch(key){
+	case GLUT_KEY_LEFT:{ // left
+		//if (
+		scene->setInputTransform(Transform(Transform::scale(-1,0)) * scene->getInputTransform());
+		break;
+	}
+	case GLUT_KEY_RIGHT:{ // left
+		//if (
+		scene->setInputTransform(Transform(Transform::scale(1,0)) * scene->getInputTransform());
+		break;
+	}
+
+	default:
+		break;
+	}
+}

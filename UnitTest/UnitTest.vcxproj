@@ -52,7 +52,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)../../opengl/include;$(SolutionDir)../../glm-0.9.4.2;$(SolutionDir)/Src;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)opengl/include;$(SolutionDir)glm-0.9.4.2;$(SolutionDir)Src;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -61,7 +61,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)../../opengl/lib/freeglut_static.lib;$(SolutionDir)../../opengl/lib/freeglut.lib;$(SolutionDir)Debug/main.obj;$(SolutionDir)Debug/PPMFile.obj;$(SolutionDir)Debug/scene.obj;$(SolutionDir)Debug/GraphicObject.obj;$(SolutionDir)Debug/Triangle2D.obj;$(SolutionDir)Debug/Color.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)opengl/lib/freeglut_static.lib;$(SolutionDir)opengl/lib/freeglut.lib;$(SolutionDir)Debug/main.obj;$(SolutionDir)Debug/PPMFile.obj;$(SolutionDir)Debug/scene.obj;$(SolutionDir)Debug/GraphicObject.obj;$(SolutionDir)Debug/Triangle2D.obj;$(SolutionDir)Debug/BezierCurve.obj;$(SolutionDir)Debug/BSpline.obj;$(SolutionDir)Debug/Input.obj;$(SolutionDir)Debug/Circle.obj;$(SolutionDir)Debug/Line.obj;$(SolutionDir)Debug/Color.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>

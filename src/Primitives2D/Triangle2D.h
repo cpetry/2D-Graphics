@@ -15,7 +15,7 @@ public:
 	Triangle2D();
 	Triangle2D(float firstPointX, float firstPointY, float secondPointX, float secondPointY, float thirdPointX, float thirdPointY, Color color = Color(), bool bayrzentricColor = false);
 	Triangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, glm::vec2 thirdPoint, Color color = Color(), bool bayrzentricColor = false);
-
+	
 	void addPoint(int x, int y);
 
 	bool operator==(Triangle2D const& t)  const ;

@@ -11,9 +11,10 @@ private:
 	Color color;
 
 public:
+	Rectangle2D();
 	Rectangle2D(float firstPointX, float firstPointY, float secondPointX, float secondPointY, Color color = Color(), bool bayrzentricColor = false);
 	Rectangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, Color color = Color(), bool bayrzentricColor = false);
-
+	
 	void addPoint(int x, int y);
 
 	void draw(unsigned char* frame);

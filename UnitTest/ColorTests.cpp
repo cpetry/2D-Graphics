@@ -47,7 +47,13 @@ namespace UnitTest
 		{
 			Color c1 = Color(155, 3, 0);
 			Color c2 = Color(200, 0, 0);
-			Assert::IsTrue(c1 == c2);
+			Assert::IsFalse(c1 == c2);
+		}
+
+		TEST_METHOD(Color_ColorTest)
+		{
+			Color c1 = Color(155, 3, 0);
+			Assert::IsTrue(c1.getR() == 155);
 		}
 	};
 }

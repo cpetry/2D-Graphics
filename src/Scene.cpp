@@ -1,6 +1,7 @@
 
 class Spline;
 #include "Scene.h"
+#include "Transform.h"
 #include "gl/glew.h"
 #include "Files/PPMFile.h"
 #include "Splines/Line.h"
@@ -8,6 +9,7 @@ class Spline;
 #include "Splines/BezierCurve.h"
 #include "Splines/BSpline.h"
 #include "Primitives2D/Triangle2D.h"
+#include "Primitives2D/Rectangle2D.h"
 
 
 Scene::Scene(int frameWidth, int frameHeight)
@@ -16,16 +18,19 @@ Scene::Scene(int frameWidth, int frameHeight)
 	this->frameHeight = frameHeight;
 	this->frame = new unsigned char[frameWidth * frameHeight * 3];
 	this->graphicObjects = std::vector<GraphicObject*>();
-	this->graphicObjectMode = GraphicObject::Mode::TRIANGLE;
+	this->graphicObjectMode = GraphicObject::Mode::LINE;
 	this->currentGraphicObject = NULL;
+	this->inputTransform = Transform();
 }
 
 void Scene::add(GraphicObject* graphicObject)
 {
 	bool alreadyExists = false;
+
 	for (auto go = this->graphicObjects.begin(); go != this->graphicObjects.end(); go++)
 		if (graphicObject == *go)
 			alreadyExists = true;
+
 	if (!alreadyExists)
 		this->graphicObjects.push_back(graphicObject);
 }
@@ -55,6 +60,10 @@ GraphicObject* Scene::getCurrentGraphicObject(){
 				go = new Triangle2D();
 				break;
 			}
+			case GraphicObject::Mode::RECTANGLE:{
+				go = new Rectangle2D();
+				break;
+			}
 			default:{
 				go = NULL;
 				break;
@@ -65,10 +74,23 @@ GraphicObject* Scene::getCurrentGraphicObject(){
 	return this->currentGraphicObject;
 }
 
+void Scene::setCurrentGraphicObjectMode(GraphicObject::Mode mode){
+	this->currentGraphicObject->isCompleted = true;
+	this->graphicObjectMode = mode;
+}
+
 void Scene::drawAllGraphicObjects()
 {
-	for (unsigned int i=0; i < graphicObjects.size(); i++)
-		drawGraphicObject(graphicObjects.at(i));
+	for (auto graphic : graphicObjects){
+		Transform t = Transform(graphic->transformObjToWorld);
+		t = this->inputTransform * t;
+		//t = graphic->getTransformationMatrix() * t;
+		t = graphic->transformWorldToObj * t;
+		graphic = *graphic * t;
+		drawGraphicObject(graphic);
+	}
+
+	this->setInputTransform(Transform());
 }
 
 void Scene::drawGraphicObject(GraphicObject* graphicObject)
@@ -79,6 +101,11 @@ void Scene::drawGraphicObject(GraphicObject* graphicObject)
 unsigned char* Scene::getFrame()
 {
 	return this->frame;
+}
+
+void Scene::clearGraphicObjects(){
+	graphicObjects.clear();
+	this->clearFrame();
 }
 
 void Scene::clearFrame(){
@@ -99,4 +126,13 @@ void Scene::saveFrame(char* location)
 void Scene::loadFrame(char* location)
 {
 	PPMFile::readPPM(fopen( location, "r"), new GLsizei(this->frameWidth), new GLsizei(this->frameHeight));
+}
+
+
+Transform Scene::getInputTransform(){
+	return this->inputTransform;
+}
+
+void Scene::setInputTransform(Transform t){
+	this->inputTransform = t;
 }

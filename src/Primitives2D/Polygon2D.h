@@ -11,6 +11,7 @@ private:
 
 public:
 	Polygon2D(std::vector<glm::vec2> points, Color color);
+
 	void addPoint(int x, int y);
 	void draw(unsigned char* frame);
 };

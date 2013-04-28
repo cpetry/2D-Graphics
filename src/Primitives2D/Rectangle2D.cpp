@@ -2,6 +2,12 @@
 
 extern int width, height;
 
+Rectangle2D::Rectangle2D(){
+	firstPoint = glm::vec2(-1, -1);
+	secondPoint = glm::vec2(-1, -1);
+	bayrzentricColor = true;
+}
+
 Rectangle2D::Rectangle2D(float firstPointX, float firstPointY, float secondPointX, float secondPointY, Color color, bool bayrzentricColor)
 	: color(color), bayrzentricColor(bayrzentricColor) {
 	int x1 = glm::min(width-1,  glm::max(0, static_cast<int>(firstPointX)));
@@ -17,10 +23,22 @@ Rectangle2D::Rectangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, Color colo
 	Rectangle2D::Rectangle2D(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y, color);
 }
 
-void Rectangle2D::addPoint(int x, int y){};
+void Rectangle2D::addPoint(int x, int y){
+	if (this->firstPoint == glm::vec2(-1,-1)){
+		this->firstPoint = glm::vec2(x, y);
+		this->isCompleted = false;
+	}
+	else if (this->secondPoint == glm::vec2(-1,-1)){
+		this->secondPoint = glm::vec2(x, y);
+		this->isCompleted = true;
+	}
+};
 
 void Rectangle2D::draw(unsigned char* frame)
 {
+	if (!this->isCompleted)
+		return;
+
 	int x0 = static_cast<int>(glm::min(firstPoint.x, secondPoint.x));
 	int y0 = static_cast<int>(glm::min(firstPoint.y, secondPoint.y));
 	int x1 = static_cast<int>(glm::max(firstPoint.x, secondPoint.x));

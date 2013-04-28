@@ -59,6 +59,9 @@
     <ClCompile Include="src\Input.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Transform.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h">
@@ -102,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="src\Splines\Spline.h">
       <Filter>Quelldateien\Splines</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Transform.h">
+      <Filter>Quelldateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

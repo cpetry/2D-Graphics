@@ -15,5 +15,6 @@ public:
 
 	void addPoint(int x, int y);
 
+
 	void draw(unsigned char* frame);
 };
