@@ -8,28 +8,33 @@ BezierCurve::BezierCurve(){
 }
 
 BezierCurve::BezierCurve(std::vector<glm::vec2> supportPoints, float accuracy, Color color)
-	: supportPoints(supportPoints), color(color)
+	: color(color)
 {
+	this->vertices = supportPoints;
 	if (accuracy >= 1.0f || accuracy <= 0.0f)
 		this->accuracy = 0.2 / supportPoints.size();
 	else
 		this->accuracy = accuracy;
 }
 
+GraphicObject* BezierCurve::copy() const {
+    return new BezierCurve(*this);
+}
+
 void BezierCurve::addPoint(int x, int y){
-	this->accuracy = 0.2 / supportPoints.size();
-	this->supportPoints.push_back(glm::vec2(x, y));
+	this->accuracy = 0.2 / vertices.size();
+	this->vertices.push_back(glm::vec2(x, y));
 	this->isCompleted = false;
 };
 
 void BezierCurve::draw(unsigned char* frame)
 {
-	std::unique_ptr<glm::vec2[]> bezierPoints (new glm::vec2 [supportPoints.size() * supportPoints.size()]);
-	int dimWidth = supportPoints.size();
+	std::unique_ptr<glm::vec2[]> bezierPoints (new glm::vec2 [vertices.size() * vertices.size()]);
+	int dimWidth = vertices.size();
 	std::vector<glm::vec2> curvePoints;
 
 	for (int i=0; i<dimWidth; i++){
-		bezierPoints[i*dimWidth + 0] = supportPoints.at(i);
+		bezierPoints[i*dimWidth + 0] = vertices.at(i);
 	}
 
 	for (float t = 0; t < 1; t += this->accuracy) {

@@ -23,8 +23,10 @@ void Input::MouseClick(int button, int state, int x, int y)
         /* Ein Knopf wurde gedrückt. Passenden Callback festlegen */
 			if (button == GLUT_LEFT_BUTTON){
 				GraphicObject* go = scene->getCurrentGraphicObject();
-				go->addPoint(x, scene->getFrameHeight() - y - 17);
-				scene->add(go);
+				if (go != NULL) {
+					go->addPoint(x, scene->getFrameHeight() - y - 17);
+					scene->add(go);
+				}
 				
 				//glutPostRedisplay();
 			}
@@ -44,12 +46,16 @@ void Input::KeyboardPressed(unsigned char key, int x, int y) {
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::LINE); break;	
 	case 'b':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::BEZIER); break;
+	case 's':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::BSPLINE); break;
 	case 'c':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::CIRCLE); break;
 	case 't':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::TRIANGLE); break;
 	case 'r':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::RECTANGLE); break;
+	case 'p':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::POLYGON); break;
 	case 127: // del/entf
 		scene->clearGraphicObjects(); break;
 	case 27: // ESC
@@ -65,17 +71,55 @@ void Input::KeyboardPressed(unsigned char key, int x, int y) {
 }
 
 void Input::KeyboardSpecialPressed(int key, int x, int y) {
+
+	Transform::Mode transMode = scene->getGraphicTransformMode();
+
 	switch(key){
 	case GLUT_KEY_LEFT:{ // left
-		//if (
-		scene->setInputTransform(Transform(Transform::scale(-1,0)) * scene->getInputTransform());
+		if (transMode == Transform::Mode::TRANSLATE)
+			scene->setInputTransform(Transform(Transform::translate(-10, 0)));
+		else if (transMode == Transform::Mode::ROTATE)
+			scene->setInputTransform(Transform(Transform::rotate(15, 0)));
+		else if (transMode == Transform::Mode::SCALE)
+			scene->setInputTransform(Transform(Transform::scale(1.2, 1)));
 		break;
 	}
-	case GLUT_KEY_RIGHT:{ // left
-		//if (
-		scene->setInputTransform(Transform(Transform::scale(1,0)) * scene->getInputTransform());
+	case GLUT_KEY_RIGHT:{ // right
+		if (transMode == Transform::Mode::TRANSLATE)
+			scene->setInputTransform(Transform(Transform::translate(10, 0)));
+		else if (transMode == Transform::Mode::ROTATE)
+			scene->setInputTransform(Transform(Transform::rotate(-15, 0)));
+		else if (transMode == Transform::Mode::SCALE)
+			scene->setInputTransform(Transform(Transform::scale(0.8, 1)));
 		break;
 	}
+	case GLUT_KEY_UP:{ // up
+		if (transMode == Transform::Mode::TRANSLATE)
+			scene->setInputTransform(Transform(Transform::translate(0, 10)));
+		else if (transMode == Transform::Mode::ROTATE)
+			scene->setInputTransform(Transform(Transform::rotate(15, 0)));
+		else if (transMode == Transform::Mode::SCALE)
+			scene->setInputTransform(Transform(Transform::scale(1, 1.2)));
+		break;
+	}
+	case GLUT_KEY_DOWN:{ // down
+		if (transMode == Transform::Mode::TRANSLATE)
+			scene->setInputTransform(Transform(Transform::translate(0, -10)));
+		else if (transMode == Transform::Mode::ROTATE)
+			scene->setInputTransform(Transform(Transform::rotate(-15, 0)));
+		else if (transMode == Transform::Mode::SCALE)
+			scene->setInputTransform(Transform(Transform::scale(1, 0.8)));
+		break;
+	}
+
+
+
+	case GLUT_KEY_F1:
+		scene->setGraphicTransformtMode(Transform::Mode::TRANSLATE); break;
+	case GLUT_KEY_F2:
+		scene->setGraphicTransformtMode(Transform::Mode::ROTATE); break;	
+	case GLUT_KEY_F3:
+		scene->setGraphicTransformtMode(Transform::Mode::SCALE); break;	
 
 	default:
 		break;

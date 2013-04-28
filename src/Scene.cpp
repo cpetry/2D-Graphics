@@ -10,6 +10,7 @@ class Spline;
 #include "Splines/BSpline.h"
 #include "Primitives2D/Triangle2D.h"
 #include "Primitives2D/Rectangle2D.h"
+#include "Primitives2D/Polygon2D.h"
 
 
 Scene::Scene(int frameWidth, int frameHeight)
@@ -19,6 +20,7 @@ Scene::Scene(int frameWidth, int frameHeight)
 	this->frame = new unsigned char[frameWidth * frameHeight * 3];
 	this->graphicObjects = std::vector<GraphicObject*>();
 	this->graphicObjectMode = GraphicObject::Mode::LINE;
+	this->graphicTransformMode = Transform::Mode::TRANSLATE;
 	this->currentGraphicObject = NULL;
 	this->inputTransform = Transform();
 }
@@ -64,6 +66,10 @@ GraphicObject* Scene::getCurrentGraphicObject(){
 				go = new Rectangle2D();
 				break;
 			}
+			case GraphicObject::Mode::POLYGON:{
+				go = new Polygon2D();
+				break;
+			}
 			default:{
 				go = NULL;
 				break;
@@ -74,6 +80,10 @@ GraphicObject* Scene::getCurrentGraphicObject(){
 	return this->currentGraphicObject;
 }
 
+GraphicObject::Mode Scene::getGraphicObjectMode(){
+	return this->graphicObjectMode;
+}
+
 void Scene::setCurrentGraphicObjectMode(GraphicObject::Mode mode){
 	this->currentGraphicObject->isCompleted = true;
 	this->graphicObjectMode = mode;
@@ -82,14 +92,37 @@ void Scene::setCurrentGraphicObjectMode(GraphicObject::Mode mode){
 void Scene::drawAllGraphicObjects()
 {
 	for (auto graphic : graphicObjects){
-		Transform t = Transform(graphic->transformObjToWorld);
-		t = this->inputTransform * t;
-		//t = graphic->getTransformationMatrix() * t;
-		t = graphic->transformWorldToObj * t;
-		graphic = *graphic * t;
-		drawGraphicObject(graphic);
+		Transform toWorld, transObj, toObject;
+		
+		
+		transObj = graphic->getTransformationMatrix();
+
+		// only if a transformation per input is given
+		if (this->getInputTransform() != Transform())
+			transObj = this->getInputTransform() * transObj;
+		graphic->setTransformationMatrix(transObj);
+
+		GraphicObject* go = graphic->copy();
+
+		////////
+		// Translate objects to world coordinates
+		toWorld = graphic->transformObjToWorld;
+		go = *go * toWorld;
+		
+		////////
+		// Transform all objects
+		transObj = go->getTransformationMatrix() * transObj;
+		go = *go * transObj;
+
+		////////
+		// Translate objects back to their coordinates
+		toObject = graphic->transformWorldToObj;
+		go = *go * toObject;
+
+		drawGraphicObject(go);
 	}
 
+	// resetting input transformation
 	this->setInputTransform(Transform());
 }
 
@@ -135,4 +168,11 @@ Transform Scene::getInputTransform(){
 
 void Scene::setInputTransform(Transform t){
 	this->inputTransform = t;
+}
+
+Transform::Mode Scene::getGraphicTransformMode(){
+	return this->graphicTransformMode;
+}
+void Scene::setGraphicTransformtMode(Transform::Mode mode){
+	this->graphicTransformMode = mode;
 }

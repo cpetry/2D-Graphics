@@ -9,6 +9,7 @@ private:
 	Transform inputTransform;
 	GraphicObject* currentGraphicObject;
 	GraphicObject::Mode graphicObjectMode;
+	Transform::Mode graphicTransformMode;
 	std::vector<GraphicObject*> graphicObjects;
 
 public:
@@ -16,7 +17,11 @@ public:
 	
 	void add(GraphicObject* graphicObject);
 	GraphicObject* getCurrentGraphicObject();
+	GraphicObject::Mode getGraphicObjectMode();
 	void setCurrentGraphicObjectMode(GraphicObject::Mode mode);
+
+	Transform::Mode getGraphicTransformMode();
+	void setGraphicTransformtMode(Transform::Mode mode);
 
 	Transform getInputTransform();
 	void setInputTransform(Transform t);

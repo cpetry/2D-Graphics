@@ -9,6 +9,10 @@ BSpline::BSpline(){
 BSpline::BSpline(std::vector<glm::vec2> supportPoints, std::vector<float> knots, float accuracy, Color color)
 	: supportPoints(supportPoints), knots(knots), accuracy(accuracy), color(color){}
 
+GraphicObject* BSpline::copy() const {
+    return new BSpline(*this);
+}
+
 void BSpline::addPoint(int x, int y){
 	this->supportPoints.push_back(glm::vec2(x, y));
 	this->isCompleted = false;

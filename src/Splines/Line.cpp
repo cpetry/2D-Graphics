@@ -30,6 +30,12 @@ Line::Line(int x1, int y1, float deg, int distance, Color color)
 	vertices.push_back(glm::vec2(x2,y2));
 }
 
+GraphicObject* Line::copy() const {
+	Line * l = new Line(*this);
+	l->vertices = this->vertices;
+    return l;
+}
+
 void Line::addPoint(int x, int y){
 	if(vertices.at(0).x == -1 && vertices.at(0).y == -1){
 		this->vertices.at(0) = glm::vec2(x,y);

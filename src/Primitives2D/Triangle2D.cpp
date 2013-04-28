@@ -4,9 +4,9 @@ extern int width, height;
 
 Triangle2D::Triangle2D(){
 	color = Color();
-	this->firstPoint  = glm::vec2(-1, -1);
-	this->secondPoint = glm::vec2(-1, -1);
-	this->thirdPoint  = glm::vec2(-1, -1);
+	this->vertices.push_back(glm::vec2(-1, -1));
+	this->vertices.push_back(glm::vec2(-1, -1));
+	this->vertices.push_back(glm::vec2(-1, -1));
 	bayrzentricColor = true;
 }
 
@@ -19,9 +19,9 @@ Triangle2D::Triangle2D(float firstPointX, float firstPointY, float secondPointX,
 	int x3 = glm::min(width-1,  glm::max(0, static_cast<int>(thirdPointX)));
 	int y3 = glm::min(height-1, glm::max(0, static_cast<int>(thirdPointY)));
 
-	this->firstPoint  = glm::vec2(x1, y1);
-	this->secondPoint = glm::vec2(x2, y2);
-	this->thirdPoint  = glm::vec2(x3, y3);
+	this->vertices.push_back(glm::vec2(x1, y1));
+	this->vertices.push_back(glm::vec2(x2, y2));
+	this->vertices.push_back(glm::vec2(x3, y3));
 }
 
 Triangle2D::Triangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, glm::vec2 thirdPoint, Color color, bool bayrzentricColor)
@@ -33,30 +33,34 @@ Triangle2D::Triangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, glm::vec2 th
 	int x3 = glm::min(width-1,  glm::max(0, static_cast<int>(thirdPoint.x)));
 	int y3 = glm::min(height-1, glm::max(0, static_cast<int>(thirdPoint.y)));
 
-	this->firstPoint  = glm::vec2(x1, y1);
-	this->secondPoint = glm::vec2(x2, y2);
-	this->thirdPoint  = glm::vec2(x3, y3);
+	this->vertices.push_back(glm::vec2(x1, y1));
+	this->vertices.push_back(glm::vec2(x2, y2));
+	this->vertices.push_back(glm::vec2(x3, y3));
+}
+
+GraphicObject* Triangle2D::copy() const {
+    return new Triangle2D(*this);
 }
 
 void Triangle2D::addPoint(int x, int y){
-	if (this->firstPoint == glm::vec2(-1,-1)){
-		this->firstPoint = glm::vec2(x, y);
+	if (this->vertices.at(0) == glm::vec2(-1,-1)){
+		this->vertices.at(0) = glm::vec2(x, y);
 		this->isCompleted = false;
 	}
-	else if (this->secondPoint == glm::vec2(-1,-1)){
-		this->secondPoint = glm::vec2(x, y);
+	else if (this->vertices.at(1) == glm::vec2(-1,-1)){
+		this->vertices.at(1) = glm::vec2(x, y);
 		this->isCompleted = false;
 	}
-	else if (this->thirdPoint == glm::vec2(-1,-1)){
-		this->thirdPoint = glm::vec2(x, y);
+	else if (this->vertices.at(2) == glm::vec2(-1,-1)){
+		this->vertices.at(2) = glm::vec2(x, y);
 
 		// testing if triangle is counterclockwise, if not rearrange!
-		int d = firstPoint.x*secondPoint.y + secondPoint.x*thirdPoint.y + thirdPoint.x*firstPoint.y 
-			   - secondPoint.y*thirdPoint.x - thirdPoint.y*firstPoint.x - firstPoint.y*secondPoint.x;
+		int d = vertices.at(0).x*vertices.at(1).y + vertices.at(1).x*vertices.at(2).y + vertices.at(2).x*vertices.at(0).y 
+			   - vertices.at(1).y*vertices.at(2).x - vertices.at(2).y*vertices.at(0).x - vertices.at(0).y*vertices.at(1).x;
 		if (d < 0){
-			glm::vec2 saveVec = secondPoint;
-			secondPoint = thirdPoint;
-			thirdPoint = saveVec;
+			glm::vec2 saveVec = vertices.at(1);
+			vertices.at(1) = vertices.at(2);
+			vertices.at(2) = saveVec;
 		}
 
 		this->isCompleted = true;
@@ -64,9 +68,9 @@ void Triangle2D::addPoint(int x, int y){
 }
 
 bool Triangle2D::operator== (Triangle2D const& t) const {
-	if (this->firstPoint == t.firstPoint
-		&& this->secondPoint == t.secondPoint
-		&& this->thirdPoint == t.thirdPoint)
+	if (this->vertices.at(0) == t.vertices.at(0)
+		&& this->vertices.at(1) == t.vertices.at(1)
+		&& this->vertices.at(2) == t.vertices.at(2))
 		return true;
 	else
 		return false;
@@ -77,12 +81,12 @@ void Triangle2D::draw(unsigned char* frame)
 	if (!this->isCompleted)
 		return;
 
-	int x0 = static_cast<int>(firstPoint.x);	
-	int y0 = static_cast<int>(firstPoint.y);
-	int x1 = static_cast<int>(secondPoint.x);
-	int y1 = static_cast<int>(secondPoint.y);
-	int x2 = static_cast<int>(thirdPoint.x);
-	int y2 = static_cast<int>(thirdPoint.y);
+	int x0 = static_cast<int>(vertices.at(0).x);	
+	int y0 = static_cast<int>(vertices.at(0).y);
+	int x1 = static_cast<int>(vertices.at(1).x);
+	int y1 = static_cast<int>(vertices.at(1).y);
+	int x2 = static_cast<int>(vertices.at(2).x);
+	int y2 = static_cast<int>(vertices.at(2).y);
 
 	
 

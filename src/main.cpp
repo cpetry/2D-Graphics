@@ -5,6 +5,7 @@
 #include "gl/glew.h"
 #include <glut.h>
 #include <memory>
+#include <string>
 
 
 #include "Splines/Line.h"
@@ -20,119 +21,79 @@
 int width = 1024, height = 768;
 std::unique_ptr<Scene> scene(new Scene(width, height));
 
+
+void renderBitmapString(float x, float y, void *font,const char *string){
+	const char *c;
+    glRasterPos2f(x, y);
+	for (c=string; *c != '\0'; c++) {
+        glutBitmapCharacter(font, *c);
+    }
+}
+
 ///////////////////////////////////////////////////////////
 // Called to draw scene
 void RenderScene(void)
 {
 	// Clear the window with current clearing color
-	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glColor3d(1.0, 0.0, 0.0);
 
+	
+	glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho( 0, glutGet( GLUT_WINDOW_WIDTH ), 0, glutGet( GLUT_WINDOW_HEIGHT ), -1, 1 );
+    glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+
+	glRasterPos2f(0, 0);
 	scene->drawAllGraphicObjects();
-
 	glDrawPixels(scene->getFrameWidth(), scene->getFrameHeight(), GL_RGB, GL_UNSIGNED_BYTE, scene->getFrame());
+
+    
+	glLoadIdentity();
+	int linestart = 50;
+	int lineheight = 15;
+	int linenum = 0;
+	std::string mode_text = "Mode: ";
+	mode_text += GraphicObject::toString(scene->getGraphicObjectMode());
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - 20, GLUT_BITMAP_9_BY_15, mode_text.c_str());
+	
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "Commands: " );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "l = Line" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "c = circle" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "b = bezier" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "s = bspline" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "r = rectangle" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "t = triangle" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "p = polygon" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F1 = Translation" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F2 = Rotation" );
+	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F3 = Scaling" );
 
 	scene->clearFrame();
 	// Flush drawing commands
-    glFlush();
+    glutSwapBuffers();
 }
 
 
 
-///////////////////////////////////////////////////////////
-// Setup the rendering state
-void SetupRC(void)
-{
+/*void refreshFunction(int i){
+	glutTimerFunc(33, refreshFunction, 1);
+	glutPostRedisplay();
+}*/
 
-	////////////////////////
-	//Lines
-	/*
-	for (float degree = 0; degree < 360; degree += 5.125){
-		color.setR(255 * degree / 360);
-		color.setG(255 * degree / 360);
-		color.setB(255 * degree / 360);
-		scene->add(new Line(width/2, height/2, degree, 100, color));
-	}*/
-
-	
-	////////////////////////
-	//Circle
-	//	scene->add(new Circle(100, 300, 100, Color(255,0,0)));
-
-	
-	////////////////////////
-	//BezierCurve
-	/*
-	// Creating bezier curve
-	std::vector<glm::vec2> bezierCurve;
-	bezierCurve.push_back(glm::vec2(100, 100));
-	bezierCurve.push_back(glm::vec2(800, 350));
-	bezierCurve.push_back(glm::vec2(300, 500));
-	bezierCurve.push_back(glm::vec2(600, 600));
-	bezierCurve.push_back(glm::vec2(500, 700));
-
-	// adding points of bezier curve
-	//for (glm::vec2 bezierPoint : bezierCurve)
-	//	scene->add(new Circle(bezierPoint.x, bezierPoint.y, 2, Color(255,255,0)));
-
-	// adding bezier Curve
-	//scene->add(new BezierCurve(bezierCurve, 0.02f, Color(0,255,0)));
-	*/
-
-	////////////////////////
-	//BSplineCurve
-	/*
-	// Creating bspline curve
-	std::vector<glm::vec2> bsplineCurve;
-	bsplineCurve.push_back(glm::vec2(100, 100));
-	bsplineCurve.push_back(glm::vec2(800, 350));
-	bsplineCurve.push_back(glm::vec2(300, 500));
-	bsplineCurve.push_back(glm::vec2(600, 600));
-	bsplineCurve.push_back(glm::vec2(800, 700));
-	bsplineCurve.push_back(glm::vec2(900, 750));
-
-	// adding points of bspline curve
-	for (glm::vec2 bsplinePoint : bsplineCurve)
-		scene->add(new Circle(bsplinePoint.x, bsplinePoint.y, 2.0f, Color(255,255,0)));
-
-	// adding bspline Curve
-	std::vector<float> knots;
-	knots.push_back(0);
-	knots.push_back(0);
-	knots.push_back(0);
-	knots.push_back(0.2f);
-	knots.push_back(0.6f);
-	knots.push_back(0.9f);
-	knots.push_back(1.0f);
-	knots.push_back(1.0f);
-	knots.push_back(1.0f);
-	scene->add(new BSpline(bsplineCurve, knots, Color(0,255,0)));
-	*/
-
-	////////////////////////
-	//Rectangle
-	//scene->add(new Rectangle2D(100, 500, 300, 800, Color(), true));
-
-	////////////////////////
-	//Triangle
-	//scene->add(new Triangle2D(400.0f, 400.0f, 600.0f, 550.0f, 350.0f, 500.0f, Color(150,0,150), true));
-	//scene->add(new Triangle2D(glm::vec2(100.0f, 100.0f), glm::vec2(600.0f, 550.0f), glm::vec2(150.0f, 500.0f), Color(), true));
-	
-
-	//Polygon
-	/*
-	std::vector<glm::vec2> pointList;
-	pointList.push_back(glm::vec2(100.0f, 100.0f));
-	pointList.push_back(glm::vec2(100.0f, 200.0f));
-	pointList.push_back(glm::vec2(200.0f, 100.0f));
-	pointList.push_back(glm::vec2(200.0f, 200.0f));
-	pointList.push_back(glm::vec2(100.0f, 100.0f));
-	scene->add(new Polygon2D(pointList, Color()));*/
-}
-
-void idle(){
+void KeyboardPressed(unsigned char key, int x, int y){
+	Input::KeyboardPressed(key, x, y);
 	glutPostRedisplay();
 }
+
+void KeyboardSpecialPressed(int key, int x, int y) {
+	Input::KeyboardSpecialPressed(key, x, y);
+	glutPostRedisplay();
+}
+
 ///////////////////////////////////////////////////////////
 // Main program entry point
 int main(int argc, char* argv[])
@@ -142,16 +103,16 @@ int main(int argc, char* argv[])
 	//scene->loadFrame("Pictures/line.ppm");
 
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(width, height);
  	glutCreateWindow("Computergrafik");
 	glutDisplayFunc(RenderScene);
 	glutMouseFunc(&Input::MouseClick);
-	glutKeyboardFunc(&Input::KeyboardPressed);
-	glutSpecialFunc(&Input::KeyboardSpecialPressed);
-	glutIdleFunc(idle);
+	glutKeyboardFunc(KeyboardPressed);
+	glutSpecialFunc(KeyboardSpecialPressed);
+	//glutIdleFunc(idle);
+	//glutTimerFunc(33, refreshFunction, 1);
 
-	SetupRC();
 	
 	glutMainLoop();
 	

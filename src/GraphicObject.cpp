@@ -38,3 +38,22 @@ void GraphicObject::setPixel(int x, int y, Color color, unsigned char* frame) {
 		frame[(y * width + x) * 3 + 2] = color.getB();
 	}
 }
+
+char* GraphicObject::toString(Mode mode){
+	if (mode == Mode::LINE)
+		return "Line";
+	else if (mode == Mode::CIRCLE)
+		return "Circle";
+	else if (mode == Mode::BEZIER)
+		return "Bezier";
+	else if (mode == Mode::BSPLINE)
+		return "BSpline";
+	else if (mode == Mode::TRIANGLE)
+		return "Triangle";
+	else if (mode == Mode::RECTANGLE)
+		return "Rectangle";
+	else if (mode == Mode::POLYGON)
+		return "Polygon";
+	else
+		return "Not known";
+}

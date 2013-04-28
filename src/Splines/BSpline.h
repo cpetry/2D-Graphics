@@ -13,6 +13,8 @@ public:
 	BSpline();
 	BSpline(std::vector<glm::vec2> supportPoints, std::vector<float> knots, float accuracy, Color color = Color());
 
+	GraphicObject* BSpline::copy() const;
+
 	void addPoint(int x, int y);
 
 

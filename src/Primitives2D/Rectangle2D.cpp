@@ -3,8 +3,8 @@
 extern int width, height;
 
 Rectangle2D::Rectangle2D(){
-	firstPoint = glm::vec2(-1, -1);
-	secondPoint = glm::vec2(-1, -1);
+	vertices.push_back(glm::vec2(-1, -1));
+	vertices.push_back(glm::vec2(-1, -1));
 	bayrzentricColor = true;
 }
 
@@ -14,8 +14,8 @@ Rectangle2D::Rectangle2D(float firstPointX, float firstPointY, float secondPoint
 	int y1 = glm::min(height-1, glm::max(0, static_cast<int>(firstPointY)));
 	int x2 = glm::min(width-1,  glm::max(0, static_cast<int>(secondPointX)));
 	int y2 = glm::min(height-1, glm::max(0, static_cast<int>(secondPointY)));
-	firstPoint = glm::vec2(x1, y1);
-	secondPoint = glm::vec2(x2, y2);
+	vertices.push_back(glm::vec2(x1, y1));
+	vertices.push_back(glm::vec2(x2, y2));
 }
 
 Rectangle2D::Rectangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, Color color, bool bayrzentricColor)
@@ -23,13 +23,17 @@ Rectangle2D::Rectangle2D(glm::vec2 firstPoint, glm::vec2 secondPoint, Color colo
 	Rectangle2D::Rectangle2D(firstPoint.x, firstPoint.y, secondPoint.x, secondPoint.y, color);
 }
 
+GraphicObject* Rectangle2D::copy() const {
+    return new Rectangle2D(*this);
+}
+
 void Rectangle2D::addPoint(int x, int y){
-	if (this->firstPoint == glm::vec2(-1,-1)){
-		this->firstPoint = glm::vec2(x, y);
+	if (this->vertices.at(0) == glm::vec2(-1,-1)){
+		this->vertices.at(0) = glm::vec2(x, y);
 		this->isCompleted = false;
 	}
-	else if (this->secondPoint == glm::vec2(-1,-1)){
-		this->secondPoint = glm::vec2(x, y);
+	else if (this->vertices.at(1) == glm::vec2(-1,-1)){
+		this->vertices.at(1) = glm::vec2(x, y);
 		this->isCompleted = true;
 	}
 };
@@ -39,10 +43,10 @@ void Rectangle2D::draw(unsigned char* frame)
 	if (!this->isCompleted)
 		return;
 
-	int x0 = static_cast<int>(glm::min(firstPoint.x, secondPoint.x));
-	int y0 = static_cast<int>(glm::min(firstPoint.y, secondPoint.y));
-	int x1 = static_cast<int>(glm::max(firstPoint.x, secondPoint.x));
-	int y1 = static_cast<int>(glm::max(firstPoint.y, secondPoint.y));
+	int x0 = static_cast<int>(glm::min(vertices.at(0).x, vertices.at(1).x));
+	int y0 = static_cast<int>(glm::min(vertices.at(0).y, vertices.at(1).y));
+	int x1 = static_cast<int>(glm::max(vertices.at(0).x, vertices.at(1).x));
+	int y1 = static_cast<int>(glm::max(vertices.at(0).y, vertices.at(1).y));
 
 	for(int y = y0; y <= y1; y++)
 		for(int x = x0; x <= x1; x++)

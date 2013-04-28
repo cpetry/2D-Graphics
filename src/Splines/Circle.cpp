@@ -2,32 +2,47 @@
 #include "Circle.h"
 
 Circle::Circle(float posX, float posY, float radius, Color color)
-	: point(posX, posY), radius(radius), color(color) {}
+	: color(color) {
+	this->vertices.push_back(glm::vec2(posX,posY));
+	this->vertices.push_back(glm::vec2(posX,posY + radius));
+}
 
 Circle::Circle(glm::vec2 point, float radius, Color color)
-	: point(point), radius(radius), color(color) {}
+	: color(color) {}
 
 void Circle::addPoint(int x, int y){
-	if(point.x == -1 && point.y == -1){
-		this->point = glm::vec2(x,y);
+	if(this->vertices.at(0).x == -1 && this->vertices.at(0).y == -1){
+		this->vertices.at(0) = glm::vec2(x,y);
 		this->isCompleted = false;
 	}
-	else if(radius == -1){
-		this->radius = std::sqrt(std::pow(std::abs(point.x - x), 2) + std::pow(std::abs(point.y - y), 2));
+	else if(this->vertices.at(1) == glm::vec2(-1,-1)){
+		float distance = std::sqrt(std::pow(std::abs(this->vertices.at(0).x - x), 2) + std::pow(std::abs(this->vertices.at(0).y - y), 2));
+		this->vertices.at(1) = glm::vec2(this->vertices.at(0).x + distance, this->vertices.at(0).y);
 		this->isCompleted = true;
 	}
 };
 
+GraphicObject* Circle::copy() const {
+	Circle * l = new Circle(*this);
+	l->vertices = this->vertices;
+    return l;
+}
+
 void Circle::draw(unsigned char* frame)
 {
-	int x = static_cast<int>(this->point.x);
-	int y = static_cast<int>(this->point.y);
+	if (!this->isCompleted)
+		return;
+
+	int x = static_cast<int>(this->vertices.at(0).x);
+	int y = static_cast<int>(this->vertices.at(0).y);
+
+	int radius = static_cast<int>(std::abs(vertices.at(1).x - this->vertices.at(0).x));
 
 	int x1 = 0;
-	int y1 = static_cast<int>(radius);
-	int f  = 1 - static_cast<int>(radius);
+	int y1 = radius;
+	int f  = 1 - radius;
 	int dx = 3;
-	int dy = 2 - 2*static_cast<int>(radius);
+	int dy = 2 - 2*radius;
 
 	while(x1<=y1) {
 		this->setPixel(x - x1, y + y1, color, frame);

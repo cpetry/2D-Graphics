@@ -19,6 +19,8 @@ public:
 	Line(int x1, int y1, int x2, int y2,  Color color = Color());
 	Line(int x1, int y1, float deg, int distance, Color color = Color());
 	
+	GraphicObject* copy() const;
+
 	void operator*(Transform transform);
 
 	void addPoint(int x, int y);
