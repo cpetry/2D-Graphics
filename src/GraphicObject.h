@@ -13,7 +13,7 @@ public:
 
 	bool isCompleted;
 	std::vector<glm::vec2> vertices;
-	Transform transformMatrix, transformObjToWorld, transformWorldToObj; 
+	Transform transformMatrix; 
 
 	GraphicObject();
 	virtual GraphicObject* copy() const=0;

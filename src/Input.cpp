@@ -95,7 +95,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		if (transMode == Transform::Mode::TRANSLATE)
 			scene->setInputTransform(Transform(Transform::translate(-10, 0)));
 		else if (transMode == Transform::Mode::ROTATE)
-			scene->setInputTransform(Transform(Transform::rotate(15, 0)));
+			scene->setInputTransform(Transform(Transform::rotate(1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
 			scene->setInputTransform(Transform(Transform::scale(1.2, 1)));
 		break;
@@ -104,7 +104,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		if (transMode == Transform::Mode::TRANSLATE)
 			scene->setInputTransform(Transform(Transform::translate(10, 0)));
 		else if (transMode == Transform::Mode::ROTATE)
-			scene->setInputTransform(Transform(Transform::rotate(-15, 0)));
+			scene->setInputTransform(Transform(Transform::rotate(-1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
 			scene->setInputTransform(Transform(Transform::scale(0.8, 1)));
 		break;
@@ -113,7 +113,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		if (transMode == Transform::Mode::TRANSLATE)
 			scene->setInputTransform(Transform(Transform::translate(0, 10)));
 		else if (transMode == Transform::Mode::ROTATE)
-			scene->setInputTransform(Transform(Transform::rotate(15, 0)));
+			scene->setInputTransform(Transform(Transform::rotate(1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
 			scene->setInputTransform(Transform(Transform::scale(1, 1.2)));
 		break;
@@ -122,7 +122,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		if (transMode == Transform::Mode::TRANSLATE)
 			scene->setInputTransform(Transform(Transform::translate(0, -10)));
 		else if (transMode == Transform::Mode::ROTATE)
-			scene->setInputTransform(Transform(Transform::rotate(-15, 0)));
+			scene->setInputTransform(Transform(Transform::rotate(-1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
 			scene->setInputTransform(Transform(Transform::scale(1, 0.8)));
 		break;

@@ -26,22 +26,20 @@ glm::mat3x3 Transform::translate (const float &tx, const float &ty){
 glm::mat3x3 Transform::rotate (const float &degrees, const float &dummy){
 	float tetha = glm::radians(degrees);
 
-	glm::mat3x3 rotatedMatrix = glm::mat3x3(cos(tetha), -sin(tetha), 0,
-											sin(tetha),  cos(tetha), 0,
-													0,0,1);
-
-	// You will change this return call
-	return rotatedMatrix;
+	return glm::mat3x3(cos(tetha), -sin(tetha), 0,
+						sin(tetha),  cos(tetha), 0,
+								0,0,1);
 }
 
 glm::vec2 Transform::operator* (glm::vec2 &v) {
-	v.x = this->matrix[0][0] * v.x + this->matrix[0][1] * v.y + this->matrix[0][2] * 1;
-	v.y = this->matrix[1][0] * v.x + this->matrix[1][1] * v.y + this->matrix[1][2] * 1;
-	return v;
+	glm::vec2 ret;
+	ret.x = this->matrix[0][0] * v.x + this->matrix[0][1] * v.y + this->matrix[0][2] * 1;
+	ret.y = this->matrix[1][0] * v.x + this->matrix[1][1] * v.y + this->matrix[1][2] * 1;
+	return glm::vec2(ret);
 }
 
 Transform Transform::operator* (Transform &t){
-	return this->matrix * t.matrix;
+	return glm::mat3x3(this->matrix * t.matrix);
 }
 
 bool Transform::operator== (const Transform &other) const{

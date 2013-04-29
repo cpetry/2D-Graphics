@@ -11,8 +11,7 @@ extern int width, height;
 extern std::unique_ptr<Scene> scene;
 
 GraphicObject::GraphicObject(){
-	this->transformObjToWorld = Transform::translate(-scene->getFrameWidth()/2.0f, -scene->getFrameHeight()/2.0f);
-	this->transformWorldToObj = Transform::translate(scene->getFrameWidth()/2.0f, scene->getFrameHeight()/2.0f);
+	this->transformMatrix = Transform();
 }
 
 GraphicObject* GraphicObject::operator* (Transform transform){

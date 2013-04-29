@@ -11,7 +11,9 @@ private:
 	GraphicObject* currentGraphicObject;
 	GraphicObject::Mode graphicObjectMode;
 	Transform::Mode graphicTransformMode;
+
 	std::vector<GraphicObject*> graphicObjects;
+	glm::vec2 pivotPoint;
 
 public:
 	Scene(int frameWidth, int frameHeight);

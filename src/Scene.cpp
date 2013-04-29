@@ -25,7 +25,8 @@ Scene::Scene(int frameWidth, int frameHeight)
 	this->currentGraphicObject = NULL;
 	this->inputTransform = Transform();
 
-	this->show_vertices = false;
+	this->pivotPoint = glm::vec2(frameWidth/2, frameHeight/2);
+	this->show_vertices = true;
 }
 
 void Scene::add(GraphicObject* graphicObject)
@@ -89,10 +90,13 @@ std::vector<GraphicObject*> Scene::getAllGraphicObjects(){
 
 glm::vec2* Scene::selectGraphicObjectAt(int x, int y){
 	int click_distance = 5;
+	if (this->pivotPoint.x > x - click_distance && this->pivotPoint.x < x + click_distance
+		&& this->pivotPoint.y > y - click_distance && this->pivotPoint.y < y + click_distance)
+		return &this->pivotPoint;
 	for (auto& go : this->graphicObjects)
 		for (auto& v : go->vertices)
-			if (v.x > x - click_distance && v.x < x + click_distance
-				&& v.y > y - click_distance && v.y < y + click_distance)
+			if ((v.x > x - click_distance && v.x < x + click_distance)
+				&& (v.y > y - click_distance && v.y < y + click_distance))
 				return &v;
 }
 
@@ -111,7 +115,6 @@ void Scene::drawAllGraphicObjects()
 	for (auto graphic : graphicObjects){
 		Transform toWorld, transObj, toObject;
 		
-		
 		transObj = graphic->getTransformationMatrix();
 
 		// only if a transformation per input is given
@@ -123,7 +126,7 @@ void Scene::drawAllGraphicObjects()
 
 		////////
 		// Translate objects to world coordinates
-		toWorld = graphic->transformObjToWorld;
+		toWorld = Transform(glm::mat3x3(1,0,-this->pivotPoint.x,0,1,-this->pivotPoint.y,0,0,1));
 		go = *go * toWorld;
 		
 		////////
@@ -133,7 +136,7 @@ void Scene::drawAllGraphicObjects()
 
 		////////
 		// Translate objects back to their coordinates
-		toObject = graphic->transformWorldToObj;
+		toObject = Transform(glm::mat3x3(1,0,this->pivotPoint.x,0,1,this->pivotPoint.y,0,0,1));;
 		go = *go * toObject;
 
 		drawGraphicObject(go);
@@ -150,6 +153,8 @@ void Scene::drawGraphicObject(GraphicObject* graphicObject)
 	graphicObject->draw(this->frame);
 	
 	if (this->show_vertices){
+		Circle(this->pivotPoint, 5, Color(180,180,100)).draw(this->frame);
+		
 		for (int i = 0; i < graphicObject->vertices.size(); i++){
 			Circle(graphicObject->vertices.at(i), 5, Color(120,120,0)).draw(this->frame);
 		}

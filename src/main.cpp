@@ -19,7 +19,7 @@
 #include "Input.h"
 #include "Scene.h"
 
-int width = 1024, height = 768;
+int width = 1024, height = 500;
 std::unique_ptr<Scene> scene(new Scene(width, height));
 glm::vec2 mouse_position = glm::vec2(0,0);
 
@@ -129,15 +129,17 @@ void RenderScene(void)
 	glutPostRedisplay();
 }*/
 
-glm::vec2* selected_vertice;
+glm::vec2* selected_vertice = NULL;
 
 
 void MouseClick(int button, int state, int x, int y){
 	selected_vertice = Input::MouseClick(button, state, x, y);
+	glutPostRedisplay();
 }
 
 void MouseMotion(int x, int y){
 	Input::MouseMotion(selected_vertice, x, y);
+	glutPostRedisplay();
 }
 
 void MousePassiveMotion(int x, int y){
@@ -170,7 +172,7 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(RenderScene);
 	glutMouseFunc(MouseClick);
 	glutMotionFunc(MouseMotion);
-	glutPassiveMotionFunc(MousePassiveMotion);
+	//glutPassiveMotionFunc(MousePassiveMotion);
 	glutKeyboardFunc(KeyboardPressed);
 	glutSpecialFunc(KeyboardSpecialPressed);
 	//glutIdleFunc(idle);

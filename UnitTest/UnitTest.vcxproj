@@ -61,7 +61,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)opengl/lib/freeglut_static.lib;$(SolutionDir)opengl/lib/freeglut.lib;$(SolutionDir)Debug/main.obj;$(SolutionDir)Debug/PPMFile.obj;$(SolutionDir)Debug/scene.obj;$(SolutionDir)Debug/GraphicObject.obj;$(SolutionDir)Debug/Triangle2D.obj;$(SolutionDir)Debug/BezierCurve.obj;$(SolutionDir)Debug/BSpline.obj;$(SolutionDir)Debug/Input.obj;$(SolutionDir)Debug/Circle.obj;$(SolutionDir)Debug/Line.obj;$(SolutionDir)Debug/Color.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)opengl/lib/freeglut_static.lib;$(SolutionDir)opengl/lib/freeglut.lib;$(SolutionDir)Debug/main.obj;$(SolutionDir)Debug/PPMFile.obj;$(SolutionDir)Debug/scene.obj;$(SolutionDir)Debug/GraphicObject.obj;$(SolutionDir)Debug/Triangle2D.obj;$(SolutionDir)Debug/BezierCurve.obj;$(SolutionDir)Debug/BSpline.obj;$(SolutionDir)Debug/Input.obj;$(SolutionDir)Debug/Circle.obj;$(SolutionDir)Debug/Line.obj;$(SolutionDir)Debug/Color.obj;$(SolutionDir)Debug/Polygon2D.obj;$(SolutionDir)Debug/Rectangle2D.obj;$(SolutionDir)Debug/Transform.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
@@ -87,6 +87,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="TransformTest.cpp" />
     <ClCompile Include="Triangle2DTests.cpp" />
     <ClCompile Include="ColorTests.cpp" />
   </ItemGroup>
