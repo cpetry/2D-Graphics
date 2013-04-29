@@ -8,7 +8,7 @@
 class GraphicObject{
 
 public:
-	enum Mode {LINE, CIRCLE, BEZIER, BSPLINE, RECTANGLE, TRIANGLE, POLYGON};
+	enum Mode {SELECTION, LINE, CIRCLE, BEZIER, BSPLINE, RECTANGLE, TRIANGLE, POLYGON};
 	static char* toString(Mode mode);
 
 	bool isCompleted;

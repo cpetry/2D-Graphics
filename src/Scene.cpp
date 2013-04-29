@@ -18,11 +18,14 @@ Scene::Scene(int frameWidth, int frameHeight)
 	this->frameWidth = frameWidth;
 	this->frameHeight = frameHeight;
 	this->frame = new unsigned char[frameWidth * frameHeight * 3];
+
 	this->graphicObjects = std::vector<GraphicObject*>();
 	this->graphicObjectMode = GraphicObject::Mode::LINE;
 	this->graphicTransformMode = Transform::Mode::TRANSLATE;
 	this->currentGraphicObject = NULL;
 	this->inputTransform = Transform();
+
+	this->show_vertices = false;
 }
 
 void Scene::add(GraphicObject* graphicObject)
@@ -80,6 +83,20 @@ GraphicObject* Scene::getCurrentGraphicObject(){
 	return this->currentGraphicObject;
 }
 
+std::vector<GraphicObject*> Scene::getAllGraphicObjects(){
+	return this->graphicObjects;
+}
+
+glm::vec2* Scene::selectGraphicObjectAt(int x, int y){
+	int click_distance = 5;
+	for (auto& go : this->graphicObjects)
+		for (auto& v : go->vertices)
+			if (v.x > x - click_distance && v.x < x + click_distance
+				&& v.y > y - click_distance && v.y < y + click_distance)
+				return &v;
+}
+
+
 GraphicObject::Mode Scene::getGraphicObjectMode(){
 	return this->graphicObjectMode;
 }
@@ -128,7 +145,15 @@ void Scene::drawAllGraphicObjects()
 
 void Scene::drawGraphicObject(GraphicObject* graphicObject)
 {
+	Circle c;
+
 	graphicObject->draw(this->frame);
+	
+	if (this->show_vertices){
+		for (int i = 0; i < graphicObject->vertices.size(); i++){
+			Circle(graphicObject->vertices.at(i), 5, Color(120,120,0)).draw(this->frame);
+		}
+	}
 }
 
 unsigned char* Scene::getFrame()
@@ -175,4 +200,12 @@ Transform::Mode Scene::getGraphicTransformMode(){
 }
 void Scene::setGraphicTransformtMode(Transform::Mode mode){
 	this->graphicTransformMode = mode;
+}
+
+void Scene::toggleShowVertices(){
+	this->show_vertices = !this->show_vertices;
+}
+
+bool Scene::getShowVertices(){
+	return this->show_vertices;
 }

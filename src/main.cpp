@@ -56,21 +56,56 @@ void RenderScene(void)
 	int linestart = 50;
 	int lineheight = 15;
 	int linenum = 0;
-	std::string mode_text = "Mode: ";
-	mode_text += GraphicObject::toString(scene->getGraphicObjectMode());
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - 20, GLUT_BITMAP_9_BY_15, mode_text.c_str());
 	
 	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "Commands: " );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "l = Line" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "c = circle" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "b = bezier" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "s = bspline" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "r = rectangle" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "t = triangle" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "p = polygon" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F1 = Translation" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F2 = Rotation" );
-	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F3 = Scaling" );
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "s = Selection" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::LINE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "l = Line" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::CIRCLE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "c = Circle" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::BEZIER) glColor3d(1.0, 1.0, 1.0); 
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "e = Bezier" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::BSPLINE) glColor3d(1.0, 1.0, 1.0); 
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "b = Bspline" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::RECTANGLE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "r = Rectangle" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::TRIANGLE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "t = Triangle" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicObjectMode() == GraphicObject::Mode::POLYGON) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "p = Polygon" );
+		glColor3d(1.0, 0.0, 0.0);
+	
+	if (scene->getGraphicTransformMode() == Transform::Mode::TRANSLATE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F1 = Translation" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicTransformMode() == Transform::Mode::ROTATE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F2 = Rotation" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getGraphicTransformMode() == Transform::Mode::SCALE) glColor3d(1.0, 1.0, 1.0);
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F3 = Scaling" );
+		glColor3d(1.0, 0.0, 0.0);
+
+	if (scene->getShowVertices())glColor3d(1.0, 1.0, 1.0);	// highlight text if vertices are shown
+		renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F4 = Show Vertices" );
+		glColor3d(1.0, 0.0, 0.0);
 
 	scene->clearFrame();
 	// Flush drawing commands
@@ -83,6 +118,16 @@ void RenderScene(void)
 	glutTimerFunc(33, refreshFunction, 1);
 	glutPostRedisplay();
 }*/
+
+glm::vec2* selected_vertice;
+
+void MouseClick(int button, int state, int x, int y){
+	selected_vertice = Input::MouseClick(button, state, x, y);
+}
+
+void MouseMotion(int x, int y){
+	Input::MouseMotion(selected_vertice, x, y);
+}
 
 void KeyboardPressed(unsigned char key, int x, int y){
 	Input::KeyboardPressed(key, x, y);
@@ -107,7 +152,8 @@ int main(int argc, char* argv[])
 	glutInitWindowSize(width, height);
  	glutCreateWindow("Computergrafik");
 	glutDisplayFunc(RenderScene);
-	glutMouseFunc(&Input::MouseClick);
+	glutMouseFunc(MouseClick);
+	glutMotionFunc(MouseMotion);
 	glutKeyboardFunc(KeyboardPressed);
 	glutSpecialFunc(KeyboardSpecialPressed);
 	//glutIdleFunc(idle);

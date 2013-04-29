@@ -9,11 +9,7 @@
 
 extern std::unique_ptr<Scene> scene;
 
-
-void Input::leftClick(int x, int y){}
-void Input::rightClick(int x, int y){}
-
-void Input::MouseClick(int button, int state, int x, int y)
+glm::vec2* Input::MouseClick(int button, int state, int x, int y)
 {
   // Respond to mouse button presses.
   // If button1 pressed, mark this state so we know in motion function.
@@ -22,12 +18,17 @@ void Input::MouseClick(int button, int state, int x, int y)
 	  if (state == GLUT_DOWN) {
         /* Ein Knopf wurde gedrückt. Passenden Callback festlegen */
 			if (button == GLUT_LEFT_BUTTON){
-				GraphicObject* go = scene->getCurrentGraphicObject();
-				if (go != NULL) {
-					go->addPoint(x, scene->getFrameHeight() - y - 17);
-					scene->add(go);
+				if (scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION)
+					return scene->selectGraphicObjectAt(x, scene->getFrameHeight() - y - 17);
+
+				else{
+					GraphicObject* go = scene->getCurrentGraphicObject();
+					if (go != NULL) {
+						go->addPoint(x, scene->getFrameHeight() - y - 17);
+						scene->add(go);
+					}
+					return NULL;
 				}
-				
 				//glutPostRedisplay();
 			}
 			//glutPostRedisplay();
@@ -37,16 +38,29 @@ void Input::MouseClick(int button, int state, int x, int y)
       //g_bButton1Down = (state == GLUT_DOWN) ? TRUE : FALSE;
 		
     }
+
 }
 
+void Input::MouseMotion(glm::vec2* v, int x, int y){
+	int click_distance = 5;
+	int real_y = scene->getFrameHeight() - y - 17;
+
+	//if (g_bButton1Down)
+		if (v != NULL && scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION){
+			v->x = x;
+			v->y = real_y;
+		}
+}
 
 void Input::KeyboardPressed(unsigned char key, int x, int y) {
 	switch(key){
+	case 's':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::SELECTION); break;	
 	case 'l':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::LINE); break;	
-	case 'b':
+	case 'e':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::BEZIER); break;
-	case 's':
+	case 'b':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::BSPLINE); break;
 	case 'c':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::CIRCLE); break;
@@ -61,10 +75,12 @@ void Input::KeyboardPressed(unsigned char key, int x, int y) {
 	case 27: // ESC
 		exit(1); break;
 
-	//37(left arrow)
-	//38(up arrow)
-	//39(right arrow)
-	//40(down arrow)
+	case 8:{ // backspace
+		for (auto& go : scene->getAllGraphicObjects())
+			go->setTransformationMatrix(Transform());
+		break;
+	}
+
 	default:
 		break;
 	}
@@ -112,7 +128,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		break;
 	}
 
-
+	
 
 	case GLUT_KEY_F1:
 		scene->setGraphicTransformtMode(Transform::Mode::TRANSLATE); break;
@@ -120,6 +136,8 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		scene->setGraphicTransformtMode(Transform::Mode::ROTATE); break;	
 	case GLUT_KEY_F3:
 		scene->setGraphicTransformtMode(Transform::Mode::SCALE); break;	
+	case GLUT_KEY_F4:
+		scene->toggleShowVertices(); break;	
 
 	default:
 		break;

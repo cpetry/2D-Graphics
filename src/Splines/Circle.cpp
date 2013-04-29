@@ -5,10 +5,15 @@ Circle::Circle(float posX, float posY, float radius, Color color)
 	: color(color) {
 	this->vertices.push_back(glm::vec2(posX,posY));
 	this->vertices.push_back(glm::vec2(posX,posY + radius));
+	this->isCompleted = true;
 }
 
 Circle::Circle(glm::vec2 point, float radius, Color color)
-	: color(color) {}
+	: color(color) {
+	this->vertices.push_back(point);
+	this->vertices.push_back(glm::vec2(point.x + radius, point.y + radius));
+	this->isCompleted = true;
+}
 
 void Circle::addPoint(int x, int y){
 	if(this->vertices.at(0).x == -1 && this->vertices.at(0).y == -1){
