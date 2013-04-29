@@ -35,27 +35,31 @@ void Polygon2D::draw(unsigned char* frame){
 	}
 	
 	// calculate intersections
-	for (int yline = static_cast<int>(miny); yline < maxy; yline++){
+	for (int yline = static_cast<int>(miny); yline < maxy; yline++){		// every line
 		std::set<float> intersectionPoints;
-		for (unsigned int i=0; i < vertices.size()-1; i++) {
-			if (vertices.at(i).y >= yline && vertices.at(i+1).y <= yline
-			||vertices.at(i).y <= yline && vertices.at(i+1).y >= yline){
-				float m = (vertices.at(i).y - vertices.at(i+1).y) / (vertices.at(i).x - vertices.at(i+1).x);
+		for (unsigned int i=0; i < vertices.size()-1; i++) {				// looking through every vertice
+			glm::vec2 point1, point2;
+			if (vertices.at(i).x < vertices.at(i+1).x) point1 = vertices.at(i), point2 = vertices.at(i+1);
+			else point1 = vertices.at(i+1), point2 = vertices.at(i);
+
+			if ((point1.y >= yline && point2.y <= yline)
+			|| (point1.y <= yline && point2.y >= yline)){
+				float m = (point1.y - point2.y) / (point1.x - point2.x);
 				// y = m*(x + b1) + c1;  y = c2   =>  c2 = m*(x+b1) + c1  =>  x = (c2 - c1) / m + b1 
-				float x = ((yline - vertices.at(i).y) / m) + vertices.at(i).x;
+				float x = ((yline - point1.y) / m) + point1.x;
 				intersectionPoints.insert(x);
 			}
 		}
 
-		for (auto p = intersectionPoints.begin(); p != (--intersectionPoints.end()) && p != intersectionPoints.end(); p++){
+		auto end = intersectionPoints.end();
+		if (intersectionPoints.size() % 2 == 1)
+			end = (--intersectionPoints.end());
+
+		for (auto p = intersectionPoints.begin(); p != end; p++){
 			int xbegin = static_cast<int>(*p), xend = static_cast<int>(*(++p));
 			for (int x = xbegin; x <= xend; x++)
 				this->setPixel(x, yline, this->color, frame);
 		}
 		intersectionPoints.clear();
 	}
-
-	
-	
-
 }

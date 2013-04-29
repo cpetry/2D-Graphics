@@ -6,6 +6,7 @@
 #include <glut.h>
 #include <memory>
 #include <string>
+#include <sstream>
 
 
 #include "Splines/Line.h"
@@ -20,7 +21,7 @@
 
 int width = 1024, height = 768;
 std::unique_ptr<Scene> scene(new Scene(width, height));
-
+glm::vec2 mouse_position = glm::vec2(0,0);
 
 void renderBitmapString(float x, float y, void *font,const char *string){
 	const char *c;
@@ -56,7 +57,16 @@ void RenderScene(void)
 	int linestart = 50;
 	int lineheight = 15;
 	int linenum = 0;
-	
+		
+	std::string mouse_pos;
+	mouse_pos += "x: ";
+	mouse_pos += std::to_string(static_cast<int>(mouse_position.x));
+	mouse_pos += ", y: ";
+	mouse_pos += std::to_string(static_cast<int>(mouse_position.y));
+
+	if (mouse_position.x > 0)
+		renderBitmapString(glutGet(GLUT_WINDOW_WIDTH)-150, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum * lineheight), GLUT_BITMAP_9_BY_15, mouse_pos.c_str());
+
 	renderBitmapString(0, glutGet( GLUT_WINDOW_HEIGHT ) - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "Commands: " );
 
 	if (scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION) glColor3d(1.0, 1.0, 1.0);
@@ -121,12 +131,18 @@ void RenderScene(void)
 
 glm::vec2* selected_vertice;
 
+
 void MouseClick(int button, int state, int x, int y){
 	selected_vertice = Input::MouseClick(button, state, x, y);
 }
 
 void MouseMotion(int x, int y){
 	Input::MouseMotion(selected_vertice, x, y);
+}
+
+void MousePassiveMotion(int x, int y){
+	mouse_position = glm::vec2(x, y);
+	glutPostRedisplay();
 }
 
 void KeyboardPressed(unsigned char key, int x, int y){
@@ -154,6 +170,7 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(RenderScene);
 	glutMouseFunc(MouseClick);
 	glutMotionFunc(MouseMotion);
+	glutPassiveMotionFunc(MousePassiveMotion);
 	glutKeyboardFunc(KeyboardPressed);
 	glutSpecialFunc(KeyboardSpecialPressed);
 	//glutIdleFunc(idle);
