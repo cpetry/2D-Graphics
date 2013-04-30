@@ -62,6 +62,9 @@
     <ClCompile Include="src\Transform.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Primitives2D\Pythagoras.cpp">
+      <Filter>Quelldateien\Primitives2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Scene.h">
@@ -108,6 +111,9 @@
     </ClInclude>
     <ClInclude Include="src\Transform.h">
       <Filter>Quelldateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Primitives2D\Pythagoras.h">
+      <Filter>Quelldateien\Primitives2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

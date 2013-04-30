@@ -41,7 +41,9 @@ void Circle::draw(unsigned char* frame)
 	int x = static_cast<int>(this->vertices.at(0).x);
 	int y = static_cast<int>(this->vertices.at(0).y);
 
-	int radius = static_cast<int>(std::abs(vertices.at(1).x - this->vertices.at(0).x));
+	int radius = static_cast<int>(std::sqrt(
+						std::pow(std::abs(x - this->vertices.at(1).x), 2) + 
+						std::pow(std::abs(y - this->vertices.at(1).y), 2)));
 
 	int x1 = 0;
 	int y1 = radius;

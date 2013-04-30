@@ -7,6 +7,7 @@ class Triangle2D : public Primitive2D{
 private:
 	bool bayrzentricColor;
 	Color color;
+	glm::vec2 center;
 
 public:
 	Triangle2D();
@@ -19,4 +20,6 @@ public:
 
 	bool operator==(Triangle2D const& t)  const ;
 	void draw(unsigned char* frame);
+
+	glm::vec2 getCenter();
 };

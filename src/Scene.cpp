@@ -11,6 +11,7 @@ class Spline;
 #include "Primitives2D/Triangle2D.h"
 #include "Primitives2D/Rectangle2D.h"
 #include "Primitives2D/Polygon2D.h"
+#include "Primitives2D/Pythagoras.h"
 
 
 Scene::Scene(int frameWidth, int frameHeight)
@@ -27,6 +28,7 @@ Scene::Scene(int frameWidth, int frameHeight)
 
 	this->pivotPoint = glm::vec2(frameWidth/2, frameHeight/2);
 	this->show_vertices = true;
+	this->auto_rotation = false;
 }
 
 void Scene::add(GraphicObject* graphicObject)
@@ -74,6 +76,10 @@ GraphicObject* Scene::getCurrentGraphicObject(){
 				go = new Polygon2D();
 				break;
 			}
+			case GraphicObject::Mode::PYTHAGORAS:{
+				go = new Pythagoras();
+				break;
+			}
 			default:{
 				go = NULL;
 				break;
@@ -115,31 +121,33 @@ void Scene::drawAllGraphicObjects()
 	for (auto graphic : graphicObjects){
 		Transform toWorld, transObj, toObject;
 		
-		transObj = graphic->getTransformationMatrix();
-
+		//transObj = graphic->getTransformationMatrix();
+		
+		if (this->auto_rotation)
+			transObj = Transform(Transform::rotate(1,0));
 		// only if a transformation per input is given
 		if (this->getInputTransform() != Transform())
 			transObj = this->getInputTransform() * transObj;
 		graphic->setTransformationMatrix(transObj);
 
-		GraphicObject* go = graphic->copy();
+		//GraphicObject* go = graphic->copy();
 
 		////////
 		// Translate objects to world coordinates
 		toWorld = Transform(glm::mat3x3(1,0,-this->pivotPoint.x,0,1,-this->pivotPoint.y,0,0,1));
-		go = *go * toWorld;
+		graphic = *graphic * toWorld;
 		
 		////////
 		// Transform all objects
-		transObj = go->getTransformationMatrix() * transObj;
-		go = *go * transObj;
+		transObj = graphic->getTransformationMatrix() * transObj;
+		graphic = *graphic * transObj;
 
 		////////
 		// Translate objects back to their coordinates
 		toObject = Transform(glm::mat3x3(1,0,this->pivotPoint.x,0,1,this->pivotPoint.y,0,0,1));;
-		go = *go * toObject;
+		graphic = *graphic * toObject;
 
-		drawGraphicObject(go);
+		drawGraphicObject(graphic);
 	}
 
 	// resetting input transformation
@@ -156,7 +164,7 @@ void Scene::drawGraphicObject(GraphicObject* graphicObject)
 		Circle(this->pivotPoint, 5, Color(180,180,100)).draw(this->frame);
 		
 		for (int i = 0; i < graphicObject->vertices.size(); i++){
-			Circle(graphicObject->vertices.at(i), 5, Color(120,120,0)).draw(this->frame);
+			Circle(graphicObject->vertices.at(i), 4, Color(120,120,0)).draw(this->frame);
 		}
 	}
 }
@@ -213,4 +221,12 @@ void Scene::toggleShowVertices(){
 
 bool Scene::getShowVertices(){
 	return this->show_vertices;
+}
+
+void Scene::toggleAutoRotation(){
+	this->auto_rotation = !this->auto_rotation;
+}
+
+bool Scene::getAutoRotation(){
+	return this->auto_rotation;
 }

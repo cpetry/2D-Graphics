@@ -1,9 +1,12 @@
+#pragma once
+
 #include <vector>
 #include <glm\glm.hpp>
 #include "GraphicObject.h"
 
 class Scene{
 private:
+	bool auto_rotation;
 	bool show_vertices;
 	int frameWidth, frameHeight;
 	unsigned char* frame;
@@ -38,6 +41,9 @@ public:
 
 	void toggleShowVertices();
 	bool getShowVertices();
+
+	void toggleAutoRotation();
+	bool getAutoRotation();
 
 	unsigned char* getFrame();
 	void setFrame(unsigned char* newframe);

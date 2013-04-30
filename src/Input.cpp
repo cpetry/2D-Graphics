@@ -70,6 +70,8 @@ void Input::KeyboardPressed(unsigned char key, int x, int y) {
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::RECTANGLE); break;
 	case 'p':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::POLYGON); break;
+	case 'y':
+		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::PYTHAGORAS); break;
 	case 127: // del/entf
 		scene->clearGraphicObjects(); break;
 	case 27: // ESC
@@ -137,7 +139,9 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 	case GLUT_KEY_F3:
 		scene->setGraphicTransformtMode(Transform::Mode::SCALE); break;	
 	case GLUT_KEY_F4:
-		scene->toggleShowVertices(); break;	
+		scene->toggleShowVertices(); break;
+	case GLUT_KEY_F5:
+		scene->toggleAutoRotation(); break;	
 
 	default:
 		break;

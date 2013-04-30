@@ -113,6 +113,9 @@ void Triangle2D::draw(unsigned char* frame)
 					this->setPixel(x, y, color, frame);
 				}
 			}
+			if (ff0 == ff1 == ff2){
+				this->center = glm::vec2(x,y);
+			}
 			ff0 = ff0 + (y0-y1);
 			ff1 = ff1 + (y1-y2);
 			ff2 = ff2 + (y2-y0);
@@ -121,4 +124,8 @@ void Triangle2D::draw(unsigned char* frame)
 		f1 = f1 + (x2-x1);
 		f2 = f2 + (x0-x2);
 	} 	
+}
+
+glm::vec2 Triangle2D::getCenter(){
+	return this->center;
 }

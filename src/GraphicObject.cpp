@@ -56,3 +56,7 @@ char* GraphicObject::toString(Mode mode){
 	else
 		return "Not known";
 }
+
+std::vector<glm::vec2> GraphicObject::getVertices(){
+	return this->vertices;
+}

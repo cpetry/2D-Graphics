@@ -8,7 +8,7 @@
 class GraphicObject{
 
 public:
-	enum Mode {SELECTION, LINE, CIRCLE, BEZIER, BSPLINE, RECTANGLE, TRIANGLE, POLYGON};
+	enum Mode {SELECTION, LINE, CIRCLE, BEZIER, BSPLINE, RECTANGLE, TRIANGLE, POLYGON, PYTHAGORAS};
 	static char* toString(Mode mode);
 
 	bool isCompleted;
@@ -26,4 +26,6 @@ public:
 
 	void setTransformationMatrix(Transform);
 	Transform getTransformationMatrix();
+
+	std::vector<glm::vec2> getVertices();
 };

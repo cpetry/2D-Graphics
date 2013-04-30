@@ -52,9 +52,9 @@ void Rectangle2D::draw(unsigned char* frame)
 		for(int x = x0; x <= x1; x++)
 			if (bayrzentricColor){
 				float c = ((static_cast<float>(x-x0) / static_cast<float>(x1-x0)) + (static_cast<float>(y-y0) / static_cast<float>(y1-y0))) / 2;
-				this->setPixel(x, y, Color(static_cast<int>((1-c) * 255),
-									 0, 
-									 static_cast<int>(c * 255))
+				this->setPixel(x, y, Color(	static_cast<int>((1-c) * 255),
+											static_cast<int>(c * 255), 
+											255 - static_cast<int>(c * 255))
 									 , frame);
 			}
 			else
