@@ -11,6 +11,7 @@ extern int width, height;
 extern std::unique_ptr<Scene> scene;
 
 GraphicObject::GraphicObject(){
+	this->pivot = glm::vec2(-1,-1);
 	this->transformMatrix = Transform();
 }
 
@@ -59,4 +60,24 @@ char* GraphicObject::toString(Mode mode){
 
 std::vector<glm::vec2> GraphicObject::getVertices(){
 	return this->vertices;
+}
+
+glm::vec2 GraphicObject::getPivot(){
+	return this->pivot;
+}
+
+void GraphicObject::calcPivot(){
+	if (this->vertices.size() < 2)
+		this->pivot = this->vertices.at(0);
+
+	float x=0, y=0;
+	for(glm::vec2 v : this->vertices){
+		x += v.x;
+		y += v.y;
+	}
+
+	x /= this->vertices.size() * 1.0F;
+	y /= this->vertices.size() * 1.0F;
+
+	this->pivot = glm::vec2(x,y);
 }

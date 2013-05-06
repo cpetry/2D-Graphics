@@ -19,7 +19,7 @@
 #include "Input.h"
 #include "Scene.h"
 
-int width = 1024, height = 1000;
+int width = 700, height = 600;
 int DESIRED_FPS = 30;
 std::unique_ptr<Scene> scene(new Scene(width, height));
 glm::vec2 mouse_position = glm::vec2(0,0);
@@ -126,8 +126,12 @@ void RenderScene(void)
 			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F4 = Show Vertices" );
 			glColor3d(1.0, 0.0, 0.0);
 
-		if (scene->getAutoRotation())glColor3d(1.0, 1.0, 1.0);	// highlight text if vertices are shown
+		if (scene->getAutoRotation())glColor3d(1.0, 1.0, 1.0);
 			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F5 = Auto-Rotation" );
+			glColor3d(1.0, 0.0, 0.0);
+
+		if (scene->getLocalGlobalRotation())glColor3d(1.0, 1.0, 1.0);
+			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F6 = Local/Global-Rotation" );
 			glColor3d(1.0, 0.0, 0.0);
 	}
 

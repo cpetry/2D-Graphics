@@ -7,6 +7,7 @@
 class Scene{
 private:
 	bool auto_rotation;
+	bool local_global_rotation;
 	bool show_vertices;
 	int frameWidth, frameHeight;
 	unsigned char* frame;
@@ -44,6 +45,9 @@ public:
 
 	void toggleAutoRotation();
 	bool getAutoRotation();
+
+	void toggleLocalGlobalRotation();
+	bool getLocalGlobalRotation();
 
 	unsigned char* getFrame();
 	void setFrame(unsigned char* newframe);

@@ -13,6 +13,7 @@ public:
 
 	bool isCompleted;
 	std::vector<glm::vec2> vertices;
+	glm::vec2 pivot;
 	Transform transformMatrix; 
 
 	GraphicObject();
@@ -28,4 +29,6 @@ public:
 	Transform getTransformationMatrix();
 
 	std::vector<glm::vec2> getVertices();
+	glm::vec2 getPivot();
+	void calcPivot();
 };

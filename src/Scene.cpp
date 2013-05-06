@@ -132,9 +132,18 @@ void Scene::drawAllGraphicObjects()
 
 		//GraphicObject* go = graphic->copy();
 
+
+		//choosing pivot
+		glm::vec2 pivot;
+		if (this->getLocalGlobalRotation())
+			pivot = graphic->getPivot();
+		else
+			pivot = this->pivotPoint;
+
 		////////
 		// Translate objects to world coordinates
-		toWorld = Transform(glm::mat3x3(1,0,-this->pivotPoint.x,0,1,-this->pivotPoint.y,0,0,1));
+		//toWorld = Transform(glm::mat3x3(1,0,-this->pivotPoint.x,0,1,-this->pivotPoint.y,0,0,1));
+		toWorld = Transform(glm::mat3x3(1,0,-pivot.x,0,1,-pivot.y,0,0,1));
 		graphic = *graphic * toWorld;
 		
 		////////
@@ -144,7 +153,8 @@ void Scene::drawAllGraphicObjects()
 
 		////////
 		// Translate objects back to their coordinates
-		toObject = Transform(glm::mat3x3(1,0,this->pivotPoint.x,0,1,this->pivotPoint.y,0,0,1));;
+		//toObject = Transform(glm::mat3x3(1,0,this->pivotPoint.x,0,1,this->pivotPoint.y,0,0,1));
+		toObject = Transform(glm::mat3x3(1,0,pivot.x,0,1,pivot.y,0,0,1));
 		graphic = *graphic * toObject;
 
 		drawGraphicObject(graphic);
@@ -229,4 +239,12 @@ void Scene::toggleAutoRotation(){
 
 bool Scene::getAutoRotation(){
 	return this->auto_rotation;
+}
+
+void Scene::toggleLocalGlobalRotation(){
+	this->local_global_rotation = !this->local_global_rotation;
+}
+
+bool Scene::getLocalGlobalRotation(){
+	return this->local_global_rotation;
 }

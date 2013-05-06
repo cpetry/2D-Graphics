@@ -25,6 +25,7 @@ glm::vec2* Input::MouseClick(int button, int state, int x, int y)
 					GraphicObject* go = scene->getCurrentGraphicObject();
 					if (go != NULL) {
 						go->addPoint(x, scene->getFrameHeight() - y - 17);
+						go->calcPivot();
 						scene->add(go);
 					}
 					return NULL;
@@ -142,6 +143,10 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		scene->toggleShowVertices(); break;
 	case GLUT_KEY_F5:
 		scene->toggleAutoRotation(); break;	
+	case GLUT_KEY_F6:
+		for (GraphicObject* go : scene->getAllGraphicObjects())
+			go->calcPivot();
+		scene->toggleLocalGlobalRotation(); break;	
 
 	default:
 		break;
