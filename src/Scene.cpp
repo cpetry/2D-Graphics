@@ -248,3 +248,11 @@ void Scene::toggleLocalGlobalRotation(){
 bool Scene::getLocalGlobalRotation(){
 	return this->local_global_rotation;
 }
+
+void Scene::toggleShowGUI(){
+	this->showGUI = !this->showGUI;
+}
+
+bool Scene::getShowGUI(){
+	return this->showGUI;
+}

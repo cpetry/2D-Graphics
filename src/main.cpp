@@ -40,7 +40,6 @@ void RenderScene(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glColor3d(1.0, 0.0, 0.0);
-
 	
 	glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -48,14 +47,13 @@ void RenderScene(void)
     glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-
 	glRasterPos2f(0, 0);
 	scene->drawAllGraphicObjects();
 	glDrawPixels(scene->getFrameWidth(), scene->getFrameHeight(), GL_RGB, GL_UNSIGNED_BYTE, scene->getFrame());
-
     
 	glLoadIdentity();
-	{
+
+	if (scene->getShowGUI()) {
 		int linestart = 50;
 		int lineheight = 15;
 		int linenum = 0;
@@ -104,7 +102,7 @@ void RenderScene(void)
 			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "p = Polygon" );
 			glColor3d(1.0, 0.0, 0.0);
 
-		if (scene->getGraphicObjectMode() == GraphicObject::Mode::POLYGON) glColor3d(1.0, 1.0, 1.0);
+		if (scene->getGraphicObjectMode() == GraphicObject::Mode::PYTHAGORAS) glColor3d(1.0, 1.0, 1.0);
 			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "y = Pythagoras" );
 			glColor3d(1.0, 0.0, 0.0);
 	

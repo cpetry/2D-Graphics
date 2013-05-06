@@ -9,6 +9,8 @@ private:
 	bool auto_rotation;
 	bool local_global_rotation;
 	bool show_vertices;
+	bool showGUI;
+
 	int frameWidth, frameHeight;
 	unsigned char* frame;
 	Transform inputTransform;
@@ -48,6 +50,9 @@ public:
 
 	void toggleLocalGlobalRotation();
 	bool getLocalGlobalRotation();
+
+	void toggleShowGUI();
+	bool getShowGUI();
 
 	unsigned char* getFrame();
 	void setFrame(unsigned char* newframe);

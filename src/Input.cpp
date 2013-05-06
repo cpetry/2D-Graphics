@@ -8,6 +8,8 @@
 #include "GraphicObject.h"
 
 extern std::unique_ptr<Scene> scene;
+int mousePosoffset = 0;
+//int mousePosoffset = 17;
 
 glm::vec2* Input::MouseClick(int button, int state, int x, int y)
 {
@@ -19,12 +21,12 @@ glm::vec2* Input::MouseClick(int button, int state, int x, int y)
         /* Ein Knopf wurde gedrückt. Passenden Callback festlegen */
 			if (button == GLUT_LEFT_BUTTON){
 				if (scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION)
-					return scene->selectGraphicObjectAt(x, scene->getFrameHeight() - y - 17);
+					return scene->selectGraphicObjectAt(x, scene->getFrameHeight() - y - mousePosoffset);
 
 				else{
 					GraphicObject* go = scene->getCurrentGraphicObject();
 					if (go != NULL) {
-						go->addPoint(x, scene->getFrameHeight() - y - 17);
+						go->addPoint(x, scene->getFrameHeight() - y - mousePosoffset);
 						go->calcPivot();
 						scene->add(go);
 					}
@@ -44,7 +46,7 @@ glm::vec2* Input::MouseClick(int button, int state, int x, int y)
 
 void Input::MouseMotion(glm::vec2* v, int x, int y){
 	int click_distance = 5;
-	int real_y = scene->getFrameHeight() - y - 17;
+	int real_y = scene->getFrameHeight() - y - mousePosoffset;
 
 	//if (g_bButton1Down)
 		if (v != NULL && scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION){
@@ -73,6 +75,8 @@ void Input::KeyboardPressed(unsigned char key, int x, int y) {
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::POLYGON); break;
 	case 'y':
 		scene->setCurrentGraphicObjectMode(GraphicObject::Mode::PYTHAGORAS); break;
+	case 9:
+		scene->toggleShowGUI(); break;
 	case 127: // del/entf
 		scene->clearGraphicObjects(); break;
 	case 27: // ESC
