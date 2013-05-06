@@ -4,7 +4,7 @@
 #include <memory>
 
 BezierCurve::BezierCurve(){
-	this->accuracy = 0.02;
+	this->accuracy = 0.02f;
 }
 
 BezierCurve::BezierCurve(std::vector<glm::vec2> supportPoints, float accuracy, Color color)
@@ -47,6 +47,9 @@ void BezierCurve::draw(unsigned char* frame)
 		
 		curvePoints.push_back(glm::vec2(x,y));
 	}
+
+	// add the last vector to the points of the curve
+	curvePoints.push_back(this->vertices.at(this->vertices.size() - 1));
 
 	for (unsigned int i = 0; i < curvePoints.size()-1; i++)
 		Line(curvePoints.at(i), curvePoints.at(i+1), color).draw(frame);

@@ -11,10 +11,11 @@ Pythagoras::Pythagoras()
 	B = glm::vec2(4 * size + position, position);
 	C = glm::vec2(position, 3 * size + position);
 	
-
-	this->t = new Triangle2D(A, B, C, Color(255,0,0));
 	glm::vec2 S = glm::vec2 ((A.x + B.x + C.x) / 3.0f, (A.y + B.y + C.y) / 3.0f);
 
+	this->vertices.push_back(A);
+	this->vertices.push_back(B);
+	this->vertices.push_back(C);
 	this->vertices.push_back(S);
 	this->isCompleted = false;
 }
@@ -37,11 +38,12 @@ void Pythagoras::addPoint(int x, int y){
 	B = glm::vec2(4 * size + x, y);
 	C = glm::vec2(x, 3 * size + y);
 
-	this->t = new Triangle2D(A, B, C,  Color(255,0,0));
+	glm::vec2 S = glm::vec2 ((A.x + B.x + C.x) / 3.0f, (A.y + B.y + C.y) / 3.0f);
 
-	glm::vec2 S = glm::vec2 (A.x + B.x + C.x / 3.0f, A.y + B.y + C.y / 3.0f);
-
-	this->vertices.at(0) = S;
+	this->vertices.at(0) = A;
+	this->vertices.at(1) = B;
+	this->vertices.at(2) = C;
+	this->vertices.at(3) = S;
 	this->isCompleted = true;
 }
 
@@ -51,29 +53,32 @@ void Pythagoras::draw(unsigned char* frame){
 
 	glm::vec2 A, B, C;
 	glm::vec2 AB_outVector, AC_outVector, Hypo_outVector;
+	std::vector<Line> lines;
 
-	A = this->t->vertices.at(0);
-	B = this->t->vertices.at(1);
-	C = this->t->vertices.at(2);
+	A = this->vertices.at(0);
+	B = this->vertices.at(1);
+	C = this->vertices.at(2);
 
 	//this->rAn.push_back(Line(A, B));
 	AB_outVector = -glm::normalize(B - A) * 3.0f * this->size;
-	this->rAn.push_back(Line(A, A + AB_outVector));
-	this->rAn.push_back(Line(C, C + AB_outVector));
-	this->rAn.push_back(Line(A + AB_outVector, C + AB_outVector));
+	lines.push_back(Line(A, A + AB_outVector));
+	lines.push_back(Line(C, C + AB_outVector));
+	lines.push_back(Line(A + AB_outVector, C + AB_outVector));
 
 	AC_outVector = -glm::normalize(C - A) * 4.0f * this->size;
-	this->rAn.push_back(Line(B, B + AC_outVector));
-	this->rAn.push_back(Line(A, A + AC_outVector));
-	this->rAn.push_back(Line(A + AC_outVector, B + AC_outVector));
+	lines.push_back(Line(B, B + AC_outVector));
+	lines.push_back(Line(A, A + AC_outVector));
+	lines.push_back(Line(A + AC_outVector, B + AC_outVector));
 
 	Hypo_outVector =  Transform(Transform::rotate(-90, 0)) * (-glm::normalize(B - C)  * 5.0f * this->size);
-	this->rAn.push_back(Line(B, B + Hypo_outVector));
-	this->rAn.push_back(Line(C, C + Hypo_outVector));
-	this->rAn.push_back(Line(C + Hypo_outVector, B + Hypo_outVector));
+	lines.push_back(Line(B, B + Hypo_outVector));
+	lines.push_back(Line(C, C + Hypo_outVector));
+	lines.push_back(Line(C + Hypo_outVector, B + Hypo_outVector));
 	//this->rAn.push_back(Line(t.vertices.at(0), t.vertices.at(1)));
 
-	t->draw(frame);
-	for (auto p : rAn)
+	Triangle2D(A,B,C).draw(frame);
+	for (auto p : lines)
 		p.draw(frame);
+
+	lines.clear();
 }

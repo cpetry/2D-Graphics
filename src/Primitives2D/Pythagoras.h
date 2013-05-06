@@ -10,7 +10,6 @@ class Pythagoras : public Primitive2D
 private:
 	Triangle2D* t;
 	float size;
-	std::vector<Line> rAn, rGeg, rHypo;
 
 public:
 	Pythagoras();

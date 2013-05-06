@@ -19,7 +19,7 @@
 #include "Input.h"
 #include "Scene.h"
 
-int width = 1024, height = 500;
+int width = 1024, height = 1000;
 int DESIRED_FPS = 30;
 std::unique_ptr<Scene> scene(new Scene(width, height));
 glm::vec2 mouse_position = glm::vec2(0,0);
