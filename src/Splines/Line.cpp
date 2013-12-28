@@ -1,7 +1,7 @@
 #include <glm\glm.hpp>
 #include <glut.h>
 
-#include "Line.h"
+#include "Splines/Line.h"
 class Color;
 
 extern int width, height;

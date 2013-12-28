@@ -1,4 +1,4 @@
-#include "Pythagoras.h"
+#include "Primitives2D/Pythagoras.h"
 
 
 Pythagoras::Pythagoras()

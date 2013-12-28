@@ -1,7 +1,7 @@
 #include <glm\glm.hpp>
 #include <set>
 
-#include "Polygon2D.h"
+#include "Primitives2D/Polygon2D.h"
 #include "Splines/Line.h"
 #include "Scene.h"
 #include "Color.h"

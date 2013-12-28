@@ -52,7 +52,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(SolutionDir)opengl/include;$(SolutionDir)glm-0.9.4.2;$(SolutionDir)Src;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)opengl/include;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -60,8 +60,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)opengl/lib/freeglut_static.lib;$(SolutionDir)opengl/lib/freeglut.lib;$(SolutionDir)Debug/main.obj;$(SolutionDir)Debug/PPMFile.obj;$(SolutionDir)Debug/scene.obj;$(SolutionDir)Debug/GraphicObject.obj;$(SolutionDir)Debug/Triangle2D.obj;$(SolutionDir)Debug/BezierCurve.obj;$(SolutionDir)Debug/BSpline.obj;$(SolutionDir)Debug/Input.obj;$(SolutionDir)Debug/Circle.obj;$(SolutionDir)Debug/Line.obj;$(SolutionDir)Debug/Color.obj;$(SolutionDir)Debug/Polygon2D.obj;$(SolutionDir)Debug/Rectangle2D.obj;$(SolutionDir)Debug/Transform.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)opengl/lib/freeglut_static.lib;$(SolutionDir)opengl/lib/freeglut.lib;main.obj;PPMFile.obj;scene.obj;GraphicObject.obj;Triangle2D.obj;BezierCurve.obj;BSpline.obj;Input.obj;Circle.obj;Line.obj;Color.obj;Polygon2D.obj;Rectangle2D.obj;Transform.obj;Pythagoras.obj;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>LIBCMT</IgnoreSpecificDefaultLibraries>
@@ -70,24 +70,25 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include;$(SolutionDir)opengl/include;$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
+      <PrecompiledHeaderFile />
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;$(SolutionDir)$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)opengl/lib/freeglut_static.lib;main.obj;PPMFile.obj;scene.obj;GraphicObject.obj;Triangle2D.obj;BezierCurve.obj;BSpline.obj;Input.obj;Circle.obj;Line.obj;Color.obj;Polygon2D.obj;Rectangle2D.obj;Transform.obj;Pythagoras.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="TransformTest.cpp" />
     <ClCompile Include="Triangle2DTests.cpp" />
     <ClCompile Include="ColorTests.cpp" />
   </ItemGroup>

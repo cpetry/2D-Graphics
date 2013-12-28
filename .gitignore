@@ -1,0 +1,12 @@
+/Debug
+/Release
+
+/*.sdf
+
+/*.suo
+/*.suo
+/UnitTest/Debug
+
+/UnitTest/Release
+
+/TestResults

@@ -1,119 +1,134 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Quelldateien">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Ressourcendateien">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\Files">
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\Files">
       <UniqueIdentifier>{4a8bcbd0-7d0c-416f-9378-a54ceafd5d2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Splines">
+    <Filter Include="src\Splines">
       <UniqueIdentifier>{8c304a6e-525c-43b7-b09a-808dd48256cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Primitives2D">
+    <Filter Include="src\Primitives2D">
       <UniqueIdentifier>{6daf4f2e-3461-4571-9c23-bd58bcdb8c82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header">
+      <UniqueIdentifier>{b1e885b0-fb59-44f4-8f1c-2190d40241cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header\Files">
+      <UniqueIdentifier>{2d97f7af-52ad-4b0f-ad1e-6f6e29a5d1ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header\Primitives2D">
+      <UniqueIdentifier>{e156778a-91e9-4565-ba93-1249b2d119e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="header\Splines">
+      <UniqueIdentifier>{d0f2152e-8b82-4f99-9b3a-59c0e8559b22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Color.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Files\PPMFile.cpp">
-      <Filter>Quelldateien\Files</Filter>
+      <Filter>src\Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Splines\Circle.cpp">
-      <Filter>Quelldateien\Splines</Filter>
+      <Filter>src\Splines</Filter>
     </ClCompile>
     <ClCompile Include="src\Splines\BezierCurve.cpp">
-      <Filter>Quelldateien\Splines</Filter>
+      <Filter>src\Splines</Filter>
     </ClCompile>
     <ClCompile Include="src\Splines\BSpline.cpp">
-      <Filter>Quelldateien\Splines</Filter>
+      <Filter>src\Splines</Filter>
     </ClCompile>
     <ClCompile Include="src\GraphicObject.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Primitives2D\Rectangle2D.cpp">
-      <Filter>Quelldateien\Primitives2D</Filter>
+      <Filter>src\Primitives2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Primitives2D\Triangle2D.cpp">
-      <Filter>Quelldateien\Primitives2D</Filter>
+      <Filter>src\Primitives2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Primitives2D\Polygon2D.cpp">
-      <Filter>Quelldateien\Primitives2D</Filter>
+      <Filter>src\Primitives2D</Filter>
     </ClCompile>
     <ClCompile Include="src\Splines\Line.cpp">
-      <Filter>Quelldateien\Splines</Filter>
+      <Filter>src\Splines</Filter>
     </ClCompile>
     <ClCompile Include="src\Input.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Transform.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Primitives2D\Pythagoras.cpp">
-      <Filter>Quelldateien\Primitives2D</Filter>
+      <Filter>src\Primitives2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Scene.h">
-      <Filter>Quelldateien</Filter>
+    <ClInclude Include="include\Color.h">
+      <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\Color.h">
-      <Filter>Quelldateien</Filter>
+    <ClInclude Include="include\GraphicObject.h">
+      <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\Files\PPMFile.h">
-      <Filter>Quelldateien\Files</Filter>
+    <ClInclude Include="include\Header.h">
+      <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\Splines\Circle.h">
-      <Filter>Quelldateien\Splines</Filter>
+    <ClInclude Include="include\Input.h">
+      <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\Splines\BezierCurve.h">
-      <Filter>Quelldateien\Splines</Filter>
+    <ClInclude Include="include\Scene.h">
+      <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\Splines\BSpline.h">
-      <Filter>Quelldateien\Splines</Filter>
+    <ClInclude Include="include\Transform.h">
+      <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="src\GraphicObject.h">
-      <Filter>Quelldateien</Filter>
+    <ClInclude Include="include\Files\PPMFile.h">
+      <Filter>header\Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Primitives2D\Primitive2D.h">
-      <Filter>Quelldateien\Primitives2D</Filter>
+    <ClInclude Include="include\Primitives2D\Rectangle2D.h">
+      <Filter>header\Primitives2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Primitives2D\Rectangle2D.h">
-      <Filter>Quelldateien\Primitives2D</Filter>
+    <ClInclude Include="include\Primitives2D\Triangle2D.h">
+      <Filter>header\Primitives2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Primitives2D\Triangle2D.h">
-      <Filter>Quelldateien\Primitives2D</Filter>
+    <ClInclude Include="include\Primitives2D\Primitive2D.h">
+      <Filter>header\Primitives2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Primitives2D\Polygon2D.h">
-      <Filter>Quelldateien\Primitives2D</Filter>
+    <ClInclude Include="include\Primitives2D\Polygon2D.h">
+      <Filter>header\Primitives2D</Filter>
     </ClInclude>
-    <ClInclude Include="src\Splines\Line.h">
-      <Filter>Quelldateien\Splines</Filter>
+    <ClInclude Include="include\Splines\Line.h">
+      <Filter>header\Splines</Filter>
     </ClInclude>
-    <ClInclude Include="src\Input.h">
-      <Filter>Quelldateien</Filter>
+    <ClInclude Include="include\Splines\Spline.h">
+      <Filter>header\Splines</Filter>
     </ClInclude>
-    <ClInclude Include="src\Splines\Spline.h">
-      <Filter>Quelldateien\Splines</Filter>
+    <ClInclude Include="include\Splines\Circle.h">
+      <Filter>header\Splines</Filter>
     </ClInclude>
-    <ClInclude Include="src\Transform.h">
-      <Filter>Quelldateien</Filter>
+    <ClInclude Include="include\Splines\BSpline.h">
+      <Filter>header\Splines</Filter>
     </ClInclude>
-    <ClInclude Include="src\Primitives2D\Pythagoras.h">
-      <Filter>Quelldateien\Primitives2D</Filter>
+    <ClInclude Include="include\Splines\BezierCurve.h">
+      <Filter>header\Splines</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Primitives2D\Pythagoras.h">
+      <Filter>header\Primitives2D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

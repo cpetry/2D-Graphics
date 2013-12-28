@@ -1,5 +1,5 @@
-﻿#include "BSpline.h"
-#include "Line.h"
+﻿#include "Splines/BSpline.h"
+#include "Splines/Line.h"
 #include <vector>
 #include <memory>
 

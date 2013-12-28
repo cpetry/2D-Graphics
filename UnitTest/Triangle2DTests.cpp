@@ -1,7 +1,7 @@
 #include <glm/glm.hpp>
 
 #include "CppUnitTest.h"
-#include "../src/Color.h"
+#include "Color.h"
 #include "Primitives2D\Triangle2D.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

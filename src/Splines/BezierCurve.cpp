@@ -1,5 +1,5 @@
-#include "BezierCurve.h"
-#include "Line.h"
+#include "Splines/BezierCurve.h"
+#include "Splines/Line.h"
 #include <vector>
 #include <memory>
 

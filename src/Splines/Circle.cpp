@@ -1,5 +1,5 @@
 
-#include "Circle.h"
+#include "Splines/Circle.h"
 
 Circle::Circle(float posX, float posY, float radius, Color color)
 	: color(color) {

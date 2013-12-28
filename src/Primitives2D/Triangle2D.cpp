@@ -1,4 +1,4 @@
-#include "Triangle2D.h"
+#include "Primitives2D/Triangle2D.h"
 
 extern int width, height;
 

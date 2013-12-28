@@ -1,4 +1,4 @@
-#include "PPMFile.h"
+#include "Files/PPMFile.h"
 
 /*-----------------------------------------------------------
  void skipComment(FILE *fin)
