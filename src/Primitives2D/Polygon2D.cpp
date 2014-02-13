@@ -56,9 +56,9 @@ void Polygon2D::draw(unsigned char* frame){
 				intersectionPoints.insert(x);
 
 				if ((point1.y == yline) && ((lasty > point1.y && point2.y > point1.y) || (lasty < point1.y && point2.y < point1.y)) ){
-					intersectionPoints.insert(x + 0.001);
+					intersectionPoints.insert(x + 0.001f);
 				}
-				lasty = point1.y;
+				lasty = static_cast<int>(point1.y);
 			}
 		}
 

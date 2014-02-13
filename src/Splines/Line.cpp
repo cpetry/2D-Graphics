@@ -55,10 +55,10 @@ void Line::draw(unsigned char* frame)
 }
 
 void Line::midpointAlgorithm(unsigned char* frame){
-	int x1 = vertices.at(0).x;
-	int y1 = vertices.at(0).y;
-	int x2 = vertices.at(1).x;
-	int y2 = vertices.at(1).y;
+	int x1 = static_cast<int>(vertices.at(0).x);
+	int y1 = static_cast<int>(vertices.at(0).y);
+	int x2 = static_cast<int>(vertices.at(1).x);
+	int y2 = static_cast<int>(vertices.at(1).y);
 	int dx = std::abs(x2 - x1);
 	int dy = std::abs(y2 - y1);
 	int f = dy - static_cast<int>(dx / 2.0f);

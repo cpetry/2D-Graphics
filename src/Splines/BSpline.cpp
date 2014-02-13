@@ -26,14 +26,14 @@ void BSpline::addPoint(int x, int y){
 	for (int p = 0; p < this->polynom; p++)
 		this->knots.push_back(0);
 	
-	for (int p = 0; p < vertices.size(); p++)
+	for (unsigned int p = 0; p < vertices.size(); p++)
 		this->knots.push_back(1.0F - (vertices.size() * 1.0F / (vertices.size() + p) * 1.0F));
 
 	for (int p = 0; p < this->polynom; p++)
 		this->knots.push_back(1);
 
 
-	this->accuracy = 0.05 / vertices.size();
+	this->accuracy = 0.05f / vertices.size();
 };
 
 void BSpline::draw(unsigned char* frame){
@@ -62,7 +62,7 @@ void BSpline::drawOpenBSplineCurve(unsigned char* frame)
 		for (float t = knots.at(i); t < knots.at(i+1); t += this->accuracy) {
 		
 			// berechne den Index i so, dass ti <= t* < ti+1
-			for (unsigned int j = 0; j <= polynom; j++){
+			for (int j = 0; j <= polynom; j++){
 				for (unsigned int l = i-polynom+j; l <= i; l++){
 					if (j == 0)
 						bezierPoints.at(0).at(l) = this->vertices.at(l);

@@ -12,7 +12,7 @@ BezierCurve::BezierCurve(std::vector<glm::vec2> supportPoints, float accuracy, C
 {
 	this->vertices = supportPoints;
 	if (accuracy >= 1.0f || accuracy <= 0.0f)
-		this->accuracy = 0.2 / supportPoints.size();
+		this->accuracy = 0.2f / supportPoints.size();
 	else
 		this->accuracy = accuracy;
 }
@@ -22,7 +22,7 @@ GraphicObject* BezierCurve::copy() const {
 }
 
 void BezierCurve::addPoint(int x, int y){
-	this->accuracy = 0.2 / vertices.size();
+	this->accuracy = 0.2f / vertices.size();
 	this->vertices.push_back(glm::vec2(x, y));
 	this->isCompleted = false;
 };

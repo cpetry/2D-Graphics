@@ -55,8 +55,8 @@ void Triangle2D::addPoint(int x, int y){
 		this->vertices.at(2) = glm::vec2(x, y);
 
 		// testing if triangle is counterclockwise, if not rearrange!
-		int d = vertices.at(0).x*vertices.at(1).y + vertices.at(1).x*vertices.at(2).y + vertices.at(2).x*vertices.at(0).y 
-			   - vertices.at(1).y*vertices.at(2).x - vertices.at(2).y*vertices.at(0).x - vertices.at(0).y*vertices.at(1).x;
+		int d = static_cast<int>(vertices.at(0).x*vertices.at(1).y + vertices.at(1).x*vertices.at(2).y + vertices.at(2).x*vertices.at(0).y 
+			   - vertices.at(1).y*vertices.at(2).x - vertices.at(2).y*vertices.at(0).x - vertices.at(0).y*vertices.at(1).x);
 		if (d < 0){
 			glm::vec2 saveVec = vertices.at(1);
 			vertices.at(1) = vertices.at(2);
@@ -104,9 +104,9 @@ void Triangle2D::draw(unsigned char* frame)
 			if(ff0 >= 0 && ff1 >=0 && ff2 >= 0) {
 				int c = ff0 + ff1 + ff2;
 				if (bayrzentricColor){
-					int red = 1.0f/c * ff0 * 255;
-					int green = 1.0f/c * ff1 * 255;
-					int blue = 1.0f/c * ff2 * 255;
+					int red = static_cast<int>(1.0f/c * ff0 * 255);
+					int green = static_cast<int>(1.0f/c * ff1 * 255);
+					int blue = static_cast<int>(1.0f/c * ff2 * 255);
 					this->setPixel(x, y, Color( red, green, blue), frame);
 				}
 				else{

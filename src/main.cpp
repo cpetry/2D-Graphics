@@ -65,72 +65,75 @@ void RenderScene(void)
 		mouse_pos += std::to_string(static_cast<int>(mouse_position.y));
 
 		if (mouse_position.x > 0)
-			renderBitmapString(scene->getFrameWidth()-150, scene->getFrameHeight() - (linestart + linenum * lineheight), GLUT_BITMAP_9_BY_15, mouse_pos.c_str());
+			renderBitmapString(scene->getFrameWidth()-150.0f, scene->getFrameHeight() - (linestart + linenum * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, mouse_pos.c_str());
 
-		renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "Commands: " );
+		renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "Commands: " );
 		linenum++;
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "s = Selection" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "s = Selection" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::LINE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "l = Line" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "l = Line" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::CIRCLE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "c = Circle" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "c = Circle" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::BEZIER) glColor3d(1.0, 1.0, 1.0); 
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "e = Bezier" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "e = Bezier" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::BSPLINE) glColor3d(1.0, 1.0, 1.0); 
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "b = Bspline" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "b = Bspline" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::RECTANGLE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "r = Rectangle" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "r = Rectangle" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::TRIANGLE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "t = Triangle" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "t = Triangle" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::POLYGON) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "p = Polygon" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "p = Polygon" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicObjectMode() == GraphicObject::Mode::PYTHAGORAS) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "y = Pythagoras" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "y = Pythagoras" );
 			glColor3d(1.0, 0.0, 0.0);
 	
 		linenum++;
 		if (scene->getGraphicTransformMode() == Transform::Mode::TRANSLATE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F1 = Translation" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F1 = Translation" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicTransformMode() == Transform::Mode::ROTATE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F2 = Rotation" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F2 = Rotation" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getGraphicTransformMode() == Transform::Mode::SCALE) glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F3 = Scaling" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F3 = Scaling" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		linenum++;
 		if (scene->getShowVertices())glColor3d(1.0, 1.0, 1.0);	// highlight text if vertices are shown
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F4 = Show Vertices" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F4 = Show Vertices" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getAutoRotation())glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F5 = Auto-Rotation" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F5 = Auto-Rotation" );
 			glColor3d(1.0, 0.0, 0.0);
 
 		if (scene->getLocalGlobalRotation())glColor3d(1.0, 1.0, 1.0);
-			renderBitmapString(0, scene->getFrameHeight() - (linestart + linenum++ * lineheight), GLUT_BITMAP_9_BY_15, "F6 = Local/Global-Rotation" );
+			renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F6 = Local/Global-Rotation" );
 			glColor3d(1.0, 0.0, 0.0);
+
+		glColor3d(1.0, 0.0, 0.0);
+		renderBitmapString(0.0f, scene->getFrameHeight() - (linestart + linenum++ * lineheight) * 1.0f, GLUT_BITMAP_9_BY_15, "F9 = Screenshot as PPM" );
 	}
 
 	scene->clearFrame();

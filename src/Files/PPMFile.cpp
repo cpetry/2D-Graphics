@@ -1,5 +1,7 @@
 #include "Files/PPMFile.h"
-
+#include <fstream>
+#include <iostream>
+#include <string>
 /*-----------------------------------------------------------
  void skipComment(FILE *fin)
  PPM allows comment lines, this routine skips over comments
@@ -70,15 +72,40 @@ unsigned char* PPMFile::readPPM(FILE *fin, GLsizei *wid, GLsizei *ht)
 
 
 void PPMFile::savePPM(char ppmFileName[], unsigned char* pixels, int width, int height){
-    FILE** ppmFile = new FILE*;
+	unsigned char* save_pixels = new unsigned char[width*height*3];
+
+	// don't quite understand why.... but it works ^^
+	for(unsigned int y = 0; y < height; y++){
+        for(unsigned int x = 0; x < width; x++){
+			for (unsigned int rgb = 0; rgb < 3; rgb++){
+				save_pixels[(x*3 + y*width*3) + rgb - 1] = pixels[(x + (height-y-1)*width) * 3 + rgb];
+			}
+		}    
+    }
+	FILE** ppmFile = new FILE*;
 	fopen_s(ppmFile, ppmFileName, "w");
 
 	if (*ppmFile != NULL) {
 		fprintf(*ppmFile, "P6\n");
 		fprintf(*ppmFile, "%d %d\n", width, height);
-		fprintf(*ppmFile, "256\n");
-		fwrite(pixels, 1, width * height * 3, *ppmFile);
+		fprintf(*ppmFile, "255\n");
+		fwrite(save_pixels, sizeof(char), width * height*3, *ppmFile);
 	
 		fclose(*ppmFile);
 	}
+	/*
+	FILE** ppmFile = new FILE*;
+	fopen_s(ppmFile, ppmFileName, "w");
+
+	if (*ppmFile != NULL) {
+		fprintf(*ppmFile, "P6\n");
+		fprintf(*ppmFile, "%d %d\n", width, height);
+		fprintf(*ppmFile, "255\n");
+		for (unsigned int y = 0; y < height; y++)
+			for (unsigned int x = 0; x < width; x++)
+				for (unsigned int rgb = 0; rgb < 3; rgb++)
+					fwrite(&pixels[x + y*width + rgb], 1, 1, *ppmFile);
+	
+		fclose(*ppmFile);
+	}*/
 }

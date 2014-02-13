@@ -41,7 +41,7 @@ glm::vec2* Input::MouseClick(int button, int state, int x, int y)
       //g_bButton1Down = (state == GLUT_DOWN) ? TRUE : FALSE;
 		
     }
-
+	return NULL;
 }
 
 void Input::MouseMotion(glm::vec2* v, int x, int y){
@@ -50,8 +50,8 @@ void Input::MouseMotion(glm::vec2* v, int x, int y){
 
 	//if (g_bButton1Down)
 		if (v != NULL && scene->getGraphicObjectMode() == GraphicObject::Mode::SELECTION){
-			v->x = x;
-			v->y = real_y;
+			v->x = x * 1.0f;
+			v->y = real_y * 1.0f;
 		}
 }
 
@@ -88,6 +88,7 @@ void Input::KeyboardPressed(unsigned char key, int x, int y) {
 		break;
 	}
 
+	
 	default:
 		break;
 	}
@@ -104,7 +105,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		else if (transMode == Transform::Mode::ROTATE)
 			scene->setInputTransform(Transform(Transform::rotate(1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
-			scene->setInputTransform(Transform(Transform::scale(1.2, 1)));
+			scene->setInputTransform(Transform(Transform::scale(1.2f, 1)));
 		break;
 	}
 	case GLUT_KEY_RIGHT:{ // right
@@ -113,7 +114,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		else if (transMode == Transform::Mode::ROTATE)
 			scene->setInputTransform(Transform(Transform::rotate(-1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
-			scene->setInputTransform(Transform(Transform::scale(0.8, 1)));
+			scene->setInputTransform(Transform(Transform::scale(0.8f, 1)));
 		break;
 	}
 	case GLUT_KEY_UP:{ // up
@@ -122,7 +123,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		else if (transMode == Transform::Mode::ROTATE)
 			scene->setInputTransform(Transform(Transform::rotate(1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
-			scene->setInputTransform(Transform(Transform::scale(1, 1.2)));
+			scene->setInputTransform(Transform(Transform::scale(1, 1.2f)));
 		break;
 	}
 	case GLUT_KEY_DOWN:{ // down
@@ -131,7 +132,7 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		else if (transMode == Transform::Mode::ROTATE)
 			scene->setInputTransform(Transform(Transform::rotate(-1, 0)));
 		else if (transMode == Transform::Mode::SCALE)
-			scene->setInputTransform(Transform(Transform::scale(1, 0.8)));
+			scene->setInputTransform(Transform(Transform::scale(1, 0.8f)));
 		break;
 	}
 
@@ -151,7 +152,11 @@ void Input::KeyboardSpecialPressed(int key, int x, int y) {
 		for (GraphicObject* go : scene->getAllGraphicObjects())
 			go->calcPivot();
 		scene->toggleLocalGlobalRotation(); break;	
-
+	case GLUT_KEY_F9:
+		scene->drawAllGraphicObjects();
+		scene->saveFrame("Screenshot.ppm"); break;
+	case GLUT_KEY_F10:
+		scene->clearGraphicObjects(); break;	
 	default:
 		break;
 	}

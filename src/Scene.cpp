@@ -104,8 +104,8 @@ glm::vec2* Scene::selectGraphicObjectAt(int x, int y){
 			if ((v.x > x - click_distance && v.x < x + click_distance)
 				&& (v.y > y - click_distance && v.y < y + click_distance))
 				return &v;
+	return NULL;
 }
-
 
 GraphicObject::Mode Scene::getGraphicObjectMode(){
 	return this->graphicObjectMode;
@@ -173,7 +173,7 @@ void Scene::drawGraphicObject(GraphicObject* graphicObject)
 	if (this->show_vertices){
 		Circle(this->pivotPoint, 5, Color(180,180,100)).draw(this->frame);
 		
-		for (int i = 0; i < graphicObject->vertices.size(); i++){
+		for (unsigned int i = 0; i < graphicObject->vertices.size(); i++){
 			Circle(graphicObject->vertices.at(i), 4, Color(120,120,0)).draw(this->frame);
 		}
 	}
@@ -206,7 +206,9 @@ void Scene::saveFrame(char* location)
 
 void Scene::loadFrame(char* location)
 {
-	PPMFile::readPPM(fopen( location, "r"), new GLsizei(this->frameWidth), new GLsizei(this->frameHeight));
+	FILE** file;
+	fopen_s(file, location, "r");
+	PPMFile::readPPM(*file, new GLsizei(this->frameWidth), new GLsizei(this->frameHeight));
 }
 
 
